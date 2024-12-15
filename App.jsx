@@ -7,10 +7,11 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import store from './redux-store/store';
 import { Provider } from 'react-redux';
+import { baseUrl } from './utils/urls';
 
 
 export default function App() {
-
+  console.log({baseUrl})
   React.useEffect(() => {
     StatusBar.setBarStyle("dark-content");
     Platform.OS === 'android' && StatusBar.setBackgroundColor('transparent');
