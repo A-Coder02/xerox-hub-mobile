@@ -11,7 +11,6 @@ import { baseUrl } from './utils/urls';
 
 
 export default function App() {
-  console.log({baseUrl})
   React.useEffect(() => {
     StatusBar.setBarStyle("dark-content");
     Platform.OS === 'android' && StatusBar.setBackgroundColor('transparent');

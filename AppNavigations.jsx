@@ -7,6 +7,7 @@ import { useNetInfo } from '@react-native-community/netinfo';
 import { useNavigation } from '@react-navigation/native';
 import NoInternetScreen from './screens/NoInternet';
 import Layout from './components/layout/Layout';
+import TypographyScreen from './screens/components/TypographyScreen';
 const Stack = createNativeStackNavigator();
 
 const getIsSignedIn = () => {
@@ -29,18 +30,18 @@ export default function AppNavigations() {
   const navigation = useNavigation()
 
 
-  React.useEffect(()=>{
-    if(!netInfo.isConnected && navigation.isReady()){
+  React.useEffect(() => {
+    if (!netInfo.isConnected && navigation.isReady()) {
       navigation?.navigate('NoInternet');
     }
     else {
-        if(navigation.canGoBack())
+      if (navigation.canGoBack())
         navigation.goBack();
     }
-  },[netInfo, navigation])
+  }, [netInfo, navigation])
 
   React.useEffect(() => {
-    const timer = setTimeout(() => { 
+    const timer = setTimeout(() => {
       setIsLoading(false);
     }, 2000)
     return () => {
@@ -53,23 +54,27 @@ export default function AppNavigations() {
   }
 
   return (
-        <Stack.Navigator screenOptions={{
-          headerShown: false
-        }}>
-          {isSignedIn ? (
-            <>
-              <Stack.Screen name="Home" component={HomeScreen} />
-              <Stack.Screen name="Profile" component={ProfileScreen} />
-              <Stack.Screen name="Settings" component={SettingsScreen} />
-            </>
-          ) : (
-            <>
-              <Stack.Screen name="SignIn" component={SignInScreen} />
-              <Stack.Screen name="SignUp" component={SignUpScreen} />
-            </>
-          )}
-          <Stack.Screen name="NoInternet" component={NoInternetScreen} />
-        </Stack.Navigator>
+    <Stack.Navigator screenOptions={{
+      headerShown: false
+    }}
+    initialRouteName='Home'
+    >
+      {isSignedIn ? (
+        <>
+          <Stack.Screen name="Home" component={TypographyScreen} />
+          <Stack.Screen name="Profile" component={ProfileScreen} />
+          <Stack.Screen name="Settings" component={SettingsScreen} />
+        </>
+      ) : (
+        <>
+          <Stack.Screen name="SignIn" component={SignInScreen} />
+          <Stack.Screen name="SignUp" component={SignUpScreen} />
+        </>
+      )}
+      <Stack.Screen name="NoInternet" component={NoInternetScreen} />
+      <Stack.Screen name="Typography" component={TypographyScreen} />
+
+    </Stack.Navigator>
 
 
   );
