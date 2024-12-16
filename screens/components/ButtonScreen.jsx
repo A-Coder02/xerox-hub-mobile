@@ -8,8 +8,7 @@ import TextField from '../../components/form/TextField';
 import OtpInput from '../../components/form/OtpInput';
 import OtpInputField from '../../components/form/OtpInput/OtpInputField';
 import BottomDrawer from '../../components/layout/BottomDrawer';
-
-
+import { Horse, Heart, Cube } from 'phosphor-react-native';
 const ButtonScreen = () => {
 
   const drawerRef = useRef();
@@ -21,6 +20,7 @@ const ButtonScreen = () => {
   return (
     <View style={{flex: 1}} >
     <ScrollView style={styles.container}>
+    <Horse />
       <Typography>Button Examples</Typography>
       <TextField/>
       <OtpInputField/>
@@ -37,9 +37,8 @@ const ButtonScreen = () => {
         <Button title='small' size='small' />
         <Button title='mini' size='mini' />
         <View style={{ flexDirection: 'row', gap: 12 , backgroundColor : colors.grayLight}} >
-          <IconButton />
-          <IconButton />
-          <IconButton size='large'  />
+          <IconButton icon={Heart} size='medium' />
+          <IconButton icon={Cube}  size='large' />
           {/* <Image style={{width: 32, height : 32}} source={require('../../assets/icons/PrintSvg.jsx')} /> */}
         </View>
       </View>

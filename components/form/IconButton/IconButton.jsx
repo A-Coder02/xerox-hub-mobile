@@ -17,10 +17,10 @@ const IconButton = ({
     variant = 'contained',
     disabled = false,
     onPress = () => { },
-    style = {button : {}, text : {}},
-    icon : Icon = null
+    style = { button: {}, text: {} },
+    icon: Icon = null
 }) => {
-    const { buttonStyle, textStyle } = getSize(size, disabled);
+    const { buttonStyle, iconStyle } = getSize(size, disabled);
     const variantStyle = getVariant(disabled ? "disabled" : variant)
 
     return (
@@ -31,7 +31,7 @@ const IconButton = ({
             disabled={disabled}
         >
             <View>
-            {Icon ? <Icon/> : null}
+                {Icon ? <Icon color={variantStyle.icon.color} weight="light" size={iconStyle.size} /> : null}
             </View>
         </TouchableHighlight>
     );
@@ -51,20 +51,20 @@ const getSize = (size) => {
 
     const sizes = {
         medium: {
-            buttonStyle: {  padding: 4, borderRadius: 8 },
-            iconStyle: { width: 24, height: 24 },
+            buttonStyle: { width: 32, height: 32, padding: 4, borderRadius: 8 },
+            iconStyle: { size: 18 },
         },
         large: {
-            buttonStyle: {  padding: 8, borderRadius: 8 },
-            iconStyle: { width: 32, height: 32 },
+            buttonStyle: { width: 48,height: 48, padding: 8, borderRadius: 8 },
+            iconStyle: { size: 32, },
         },
     };
 
-    const { buttonStyle, textStyle } = sizes[size] || sizes.medium;
+    const { buttonStyle, iconStyle } = sizes[size] || sizes.medium;
 
     return {
         buttonStyle: { ...buttonStyle },
-        textStyle: { ...textStyle, fontWeight: '500' },
+        iconStyle: { ...iconStyle, },
     };
 };
 
@@ -73,30 +73,28 @@ const getVariant = variant => {
     const variants = {
         contained: {
             button: { backgroundColor: colors.primary, borderColor: colors.primary },
-            text: { color: colors.white },
+            icon: { color: colors.white },
             underlayColor: colors.primaryDark
         },
         outlined: {
             button: { backgroundColor: colors.white, borderColor: colors.primary },
-            text: { color: colors.primary },
+            icon: { color: colors.primary },
             underlayColor: colors.primaryLight
-
         },
         'outlined-dark': {
             button: { backgroundColor: colors.transparent, borderColor: colors.black },
-            text: { color: colors.black },
+            icon: { color: colors.black },
             underlayColor: colors.grayLight
-
         },
         text: {
             button: { backgroundColor: colors.transparent, borderColor: colors.transparent },
-            text: { color: colors.primary },
+            icon: { color: colors.primary },
             underlayColor: colors.gray
 
         },
         disabled: {
             button: { backgroundColor: colors.grayLight, borderColor: colors.grayLight },
-            text: { color: colors.gray },
+            icon: { color: colors.gray },
         },
     }
 
