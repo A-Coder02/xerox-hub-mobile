@@ -23,7 +23,6 @@ const Button = ({
 }) => {
     const { buttonStyle, textStyle } = getSize(size, color, disabled);
     const variantStyle = getVariant(disabled ? "disabled" : variant)
-    console.log({ variantStyle })
 
     return (
         <TouchableHighlight
@@ -47,7 +46,7 @@ export default Button;
  * @param {boolean} disabled - Whether the button is disabled.
  * @returns {Object} - Button and text style objects.
  */
-const getSize = (size, color, disabled) => {
+const getSize = (size) => {
 
     const sizes = {
         mini: {

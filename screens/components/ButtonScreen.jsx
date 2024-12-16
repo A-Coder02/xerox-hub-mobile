@@ -2,19 +2,20 @@ import React from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
 import Typography from '../../components/typography/Typography';
 import Button from '../../components/form/Button';
+import colors from '../../utils/colors';
 
 const ButtonScreen = () => {
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <ScrollView style={styles.container}>
       <Typography>Button Examples</Typography>
-      {/* <View style={{gap: 8}} >
+      <View style={{gap: 8}} >
       <Typography>Sizes</Typography>
       <Button title='Default (Medium)' />
       <Button title='Medium' size='medium' />
       <Button title='Large' size='large' />
       <Button title='small' size='small' />
       <Button title='mini' size='mini' />
-      </View> */}
+      </View>
       <View style={{gap: 8}} >
       <Typography>Variants</Typography>
       <Button title='Default (Contained)' />
@@ -23,6 +24,15 @@ const ButtonScreen = () => {
       <Button title='outlined-dark' variant='outlined-dark' />
       <Button title='text' variant='text' />
       <Button title='disabled' disabled />
+      <Button title='Custom Style' style={{
+        button : {
+          backgroundColor: colors.primaryDark,
+        },
+        text : {
+          color : colors.black
+        }
+      }} />
+      <Button title='Custom Style'  />
       </View>
     </ScrollView>
   );
