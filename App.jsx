@@ -9,7 +9,7 @@ import store from './redux-store/store';
 import { Provider } from 'react-redux';
 import { baseUrl } from './utils/urls';
 import ButtonScreen from './screens/components/ButtonScreen';
-
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export default function App() {
   React.useEffect(() => {
@@ -21,6 +21,7 @@ export default function App() {
   return (
     <>
       <Provider store={store}>
+        <GestureHandlerRootView>
         <SafeAreaProvider>
           <StatusBar translucent backgroundColor="transparent" />
           <StatusBar translucent backgroundColor="transparent" />
@@ -30,6 +31,7 @@ export default function App() {
             </NavigationContainer>
           </View>
         </SafeAreaProvider>
+        </GestureHandlerRootView>
       </Provider>
 
     </>
