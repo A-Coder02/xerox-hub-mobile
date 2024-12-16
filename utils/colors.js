@@ -6,5 +6,6 @@ export default colors = {
     white : "#FAFAFA",
     gray : "#D1CFD7",
     grayLight : "#F5F2FB",
-    grayDark : "#43BF6C"
+    grayDark : "#43BF6C",
+    transparent : "#FF000000",
 }

@@ -15,20 +15,24 @@ import colors from '../../../utils/colors';
 const Button = ({
     title,
     size = 'medium',
+    variant = 'contained',
     color = 'primary',
     disabled = false,
-    onPress = () => {}
+    onPress = () => { },
+    style = {button : {}, text : {}}
 }) => {
     const { buttonStyle, textStyle } = getSize(size, color, disabled);
+    const variantStyle = getVariant(disabled ? "disabled" : variant)
+    console.log({ variantStyle })
 
     return (
         <TouchableHighlight
-            underlayColor={colors.primaryDark}
-            style={[styles.baseButton, buttonStyle]}
+            underlayColor={variantStyle.underlayColor}
+            style={[styles.button, variantStyle.button, buttonStyle, style.button]}
             onPress={onPress}
             disabled={disabled}
         >
-            <Text style={[styles.baseText, textStyle]}>{title}</Text>
+            <Text style={[styles.text, variantStyle.text, textStyle, style.text]}>{title}</Text>
         </TouchableHighlight>
     );
 };
@@ -44,16 +48,15 @@ export default Button;
  * @returns {Object} - Button and text style objects.
  */
 const getSize = (size, color, disabled) => {
-    const backgroundColor = disabled ? colors.gray : colors[color] || colors.primary;
 
     const sizes = {
         mini: {
             buttonStyle: { paddingVertical: 12, paddingHorizontal: 8, borderRadius: 8 },
-            textStyle: { fontSize: 12, fontWeight: 600  },
+            textStyle: { fontSize: 12, fontWeight: 600 },
         },
         small: {
             buttonStyle: { paddingVertical: 16, paddingHorizontal: 24, borderRadius: 8 },
-            textStyle: { fontSize: 14, fontWeight: 600  },
+            textStyle: { fontSize: 14, fontWeight: 600 },
         },
         medium: {
             buttonStyle: { paddingVertical: 16, paddingHorizontal: 12, borderRadius: 8 },
@@ -68,18 +71,55 @@ const getSize = (size, color, disabled) => {
     const { buttonStyle, textStyle } = sizes[size] || sizes.medium;
 
     return {
-        buttonStyle: { ...buttonStyle, backgroundColor },
-        textStyle: { ...textStyle, color: disabled ? colors.grayDark : colors.white, fontWeight: '500' },
+        buttonStyle: { ...buttonStyle },
+        textStyle: { ...textStyle, fontWeight: '500' },
     };
 };
 
+const getVariant = variant => {
+    // borderWidth and its color
+    const variants = {
+        contained: {
+            button: { backgroundColor: colors.primary, borderColor: colors.primary },
+            text: { color: colors.white },
+            underlayColor: colors.primaryDark
+        },
+        outlined: {
+            button: { backgroundColor: colors.white, borderColor: colors.primary },
+            text: { color: colors.primary },
+            underlayColor: colors.primaryLight
+
+        },
+        'outlined-dark': {
+            button: { backgroundColor: colors.transparent, borderColor: colors.black },
+            text: { color: colors.black },
+            underlayColor: colors.grayLight
+
+        },
+        text: {
+            button: { backgroundColor: colors.transparent, borderColor: colors.transparent },
+            text: { color: colors.primary },
+            underlayColor: colors.gray
+
+        },
+        disabled: {
+            button: { backgroundColor: colors.grayLight, borderColor: colors.grayLight },
+            text: { color: colors.gray },
+        },
+    }
+
+    const variantStyle = variants[variant] || variants.contained;
+    return variantStyle
+}
+
 const styles = StyleSheet.create({
-    baseButton: {
+    button: {
         alignItems: 'center',
         justifyContent: 'center',
         marginVertical: 5,
+        borderWidth: 1
     },
-    baseText: {
+    text: {
         fontWeight: '500',
     },
 });
