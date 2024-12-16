@@ -62,7 +62,7 @@ const getSize = (size) => {
             textStyle: { fontSize: 16, fontWeight: 600 },
         },
         large: {
-            buttonStyle: { paddingVertical: 24, paddingHorizontal: 16, borderRadius: 30 },
+            buttonStyle: { paddingVertical: 20, paddingHorizontal: 16, borderRadius: 48 },
             textStyle: { fontSize: 18, fontWeight: 600 },
         },
     };
