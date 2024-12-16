@@ -1,10 +1,6 @@
 import React, { forwardRef, useCallback, useImperativeHandle, useRef } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { StyleSheet } from 'react-native';
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
-import Typography from '../../typography/Typography';
-import TextField from '../../form/TextField';
-import Button from '../../form/Button';
 
 const BottomDrawer = forwardRef((props, ref) => {
     const bottomSheetRef = useRef(null);
@@ -39,7 +35,6 @@ const BottomDrawer = forwardRef((props, ref) => {
     }));
 
     return (
-       
             <BottomSheet
                 index={-1}
                 handleIndicatorStyle={styles.handleIndicator}
@@ -49,11 +44,7 @@ const BottomDrawer = forwardRef((props, ref) => {
                 onChange={handleSheetChanges}
             >
                 <BottomSheetView style={styles.contentContainer}>
-                    <Typography>Awesome 🎉</Typography>
-                    <TextField />
-                    <TextField />
-                    <TextField />
-                    <Button onPress={handleClose} title="Close" />
+                   {props.children}
                 </BottomSheetView>
             </BottomSheet>
     );
