@@ -8,12 +8,16 @@ const OtpInput = ({ length = 4, onChange, style, inputStyle }) => {
   const inputs = useRef([]);
 
   const handleInputChange = (text, index) => {
+    console.log({text})
     const newOtp = [...otp];
     newOtp[index] = text;
     setOtp(newOtp);
     onChange && onChange(newOtp.join(''));
 
-    if (text && index < length - 1) {
+    if(!text) {
+      inputs.current[index - 1]?.focus();
+    }
+    else if (text && index < length - 1) {
       inputs.current[index + 1]?.focus();
     }
   };
