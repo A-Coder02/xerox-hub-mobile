@@ -4,12 +4,14 @@ import Typography from '../../components/typography/Typography';
 import Button from '../../components/form/Button';
 import colors from '../../utils/colors';
 import IconButton from '../../components/form/IconButton/IconButton';
+import TextField from '../../components/form/TextField';
 
 
 const ButtonScreen = () => {
   return (
     <ScrollView style={styles.container}>
       <Typography>Button Examples</Typography>
+      <TextField/>
       <View style={{ gap: 8 }} >
         <Typography>Sizes</Typography>
         <Button title='Default (Medium)' />
