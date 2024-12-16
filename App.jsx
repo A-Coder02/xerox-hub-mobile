@@ -20,8 +20,8 @@ export default function App() {
   
   return (
     <>
+    <GestureHandlerRootView style={{flex: 1}} >
       <Provider store={store}>
-        <GestureHandlerRootView>
         <SafeAreaProvider>
           <StatusBar translucent backgroundColor="transparent" />
           <StatusBar translucent backgroundColor="transparent" />
@@ -31,8 +31,8 @@ export default function App() {
             </NavigationContainer>
           </View>
         </SafeAreaProvider>
-        </GestureHandlerRootView>
       </Provider>
+      </GestureHandlerRootView>
 
     </>
   );
