@@ -8,6 +8,7 @@ import { useNavigation } from '@react-navigation/native';
 import NoInternetScreen from './screens/NoInternet';
 import Layout from './components/layout/Layout';
 import TypographyScreen from './screens/components/TypographyScreen';
+import ButtonScreen from './screens/components/ButtonScreen';
 const Stack = createNativeStackNavigator();
 
 const getIsSignedIn = () => {
@@ -57,11 +58,11 @@ export default function AppNavigations() {
     <Stack.Navigator screenOptions={{
       headerShown: false
     }}
-    initialRouteName='Home'
+    initialRouteName='Button'
     >
       {isSignedIn ? (
         <>
-          <Stack.Screen name="Home" component={TypographyScreen} />
+          <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Profile" component={ProfileScreen} />
           <Stack.Screen name="Settings" component={SettingsScreen} />
         </>
@@ -73,6 +74,7 @@ export default function AppNavigations() {
       )}
       <Stack.Screen name="NoInternet" component={NoInternetScreen} />
       <Stack.Screen name="Typography" component={TypographyScreen} />
+      <Stack.Screen name="Button" component={ButtonScreen} />
 
     </Stack.Navigator>
 
