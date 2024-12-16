@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, StyleSheet, TouchableHighlight } from 'react-native';
+import { Text, StyleSheet, TouchableHighlight, View } from 'react-native';
 import colors from '../../../utils/colors';
 
 /**
@@ -13,16 +13,14 @@ import colors from '../../../utils/colors';
  * @param {() => void} props.onPress - Callback function for button press.
  */
 const IconButton = ({
-    title,
     size = 'medium',
     variant = 'contained',
-    color = 'primary',
     disabled = false,
     onPress = () => { },
     style = {button : {}, text : {}},
     icon : Icon = null
 }) => {
-    const { buttonStyle, textStyle } = getSize(size, color, disabled);
+    const { buttonStyle, textStyle } = getSize(size, disabled);
     const variantStyle = getVariant(disabled ? "disabled" : variant)
 
     return (
@@ -32,8 +30,9 @@ const IconButton = ({
             onPress={onPress}
             disabled={disabled}
         >
+            <View>
             {Icon ? <Icon/> : null}
-            {/* <Text style={[styles.text, variantStyle.text, textStyle, style.text]}>{title}</Text> */}
+            </View>
         </TouchableHighlight>
     );
 };
@@ -51,18 +50,13 @@ export default IconButton;
 const getSize = (size) => {
 
     const sizes = {
-        
-        small: {
-            buttonStyle: { paddingVertical: 16, paddingHorizontal: 24, borderRadius: 8 },
-            textStyle: { fontSize: 14, fontWeight: 600 },
-        },
         medium: {
-            buttonStyle: { paddingVertical: 16, paddingHorizontal: 12, borderRadius: 8 },
-            textStyle: { fontSize: 16, fontWeight: 600 },
+            buttonStyle: {  padding: 4, borderRadius: 8 },
+            iconStyle: { width: 24, height: 24 },
         },
         large: {
-            buttonStyle: { paddingVertical: 20, paddingHorizontal: 16, borderRadius: 48 },
-            textStyle: { fontSize: 18, fontWeight: 600 },
+            buttonStyle: {  padding: 8, borderRadius: 8 },
+            iconStyle: { width: 32, height: 32 },
         },
     };
 
