@@ -5,6 +5,8 @@ import Button from '../../components/form/Button';
 import colors from '../../utils/colors';
 import IconButton from '../../components/form/IconButton/IconButton';
 import TextField from '../../components/form/TextField';
+import OtpInput from '../../components/form/OtpInput';
+import OtpInputField from '../../components/form/OtpInput/OtpInputField';
 
 
 const ButtonScreen = () => {
@@ -12,6 +14,7 @@ const ButtonScreen = () => {
     <ScrollView style={styles.container}>
       <Typography>Button Examples</Typography>
       <TextField/>
+      <OtpInputField/>
       <View style={{ gap: 8 }} >
         <Typography>Sizes</Typography>
         <Button title='Default (Medium)' />
