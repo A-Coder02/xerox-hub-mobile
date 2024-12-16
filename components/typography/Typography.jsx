@@ -36,7 +36,7 @@ export default Typography;
  * @param {number} [fontWeight] - Custom font weight.
  * @returns {Object} - The style object.
  */
-const getVariant = (fontStyle, color, fontSize, fontWeight) => {
+const getVariant = (variant, color, fontSize, fontWeight) => {
   const colorValue = colors[color] || colors.black;
 
   const defaultStyles = {
@@ -48,7 +48,7 @@ const getVariant = (fontStyle, color, fontSize, fontWeight) => {
     h3: { fontSize: 18, fontWeight: 500 },
   };
 
-  const { fontSize: defaultFontSize, fontWeight: defaultFontWeight } = defaultStyles[fontStyle] || defaultStyles.base;
+  const { fontSize: defaultFontSize, fontWeight: defaultFontWeight } = defaultStyles[variant] || defaultStyles.base;
 
   return {
     fontSize: fontSize || defaultFontSize,
