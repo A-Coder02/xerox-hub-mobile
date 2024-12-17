@@ -1,27 +1,38 @@
-import React, { forwardRef, useCallback, useImperativeHandle, useRef } from 'react';
+import React, { forwardRef, useCallback, useImperativeHandle, useRef, useState } from 'react';
 import { StyleSheet } from 'react-native';
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 const BottomDrawer = forwardRef((props, ref) => {
     const bottomSheetRef = useRef(null);
+    const [isOpen, setIsOpen] = useState(false)
 
     // Memoized callbacks for internal use
     const handleSheetChanges = useCallback((index) => {
         console.log('Sheet changed to index:', index);
+        if(index !== -1) {
+            setIsOpen(true)
+        }
+        else {
+            setIsOpen(false)
+        }
     }, []);
 
     const handleOpen = useCallback(() => {
+        setIsOpen(true)
         bottomSheetRef.current?.expand();
     }, []);
 
     const handleClose = useCallback(() => {
+        setIsOpen(false)
         bottomSheetRef.current?.close();
     }, []);
 
     const handleSnapToIndex = useCallback((index) => {
+        setIsOpen(true)
         bottomSheetRef.current?.snapToIndex(index);
     }, []);
 
     const handleSnapToPosition = useCallback((position) => {
+        setIsOpen(true)
         bottomSheetRef.current?.snapToPosition(position);
     }, []);
 
@@ -35,6 +46,8 @@ const BottomDrawer = forwardRef((props, ref) => {
 
     return (
             <BottomSheet
+                containerStyle={{backgroundColor : isOpen ? '#8c8c8c4a' : null}}
+                backgroundStyle={{ borderTopLeftRadius : 16, borderTopRightRadius : 16}}
                 index={-1}
                 handleIndicatorStyle={styles.handleIndicator}
                 enablePanDownToClose
@@ -58,7 +71,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'grey',
     },
     handleIndicator: {
-        backgroundColor: 'red',
+        display : 'none'
     },
     contentContainer: {
         flex: 1,
