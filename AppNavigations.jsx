@@ -9,6 +9,7 @@ import NoInternetScreen from './screens/NoInternet';
 import Layout from './components/layout/Layout';
 import TypographyScreen from './screens/components/TypographyScreen';
 import ButtonScreen from './screens/components/ButtonScreen';
+import ChooseLocationScreen from './screens/locations/ChooseLocationScreen';
 const Stack = createNativeStackNavigator();
 
 const getIsSignedIn = () => {
@@ -65,6 +66,7 @@ export default function AppNavigations() {
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Profile" component={ProfileScreen} />
           <Stack.Screen name="Settings" component={SettingsScreen} />
+          <Stack.Screen name="ChooseLocation" component={ChooseLocationScreen} />
         </>
       ) : (
         <>
