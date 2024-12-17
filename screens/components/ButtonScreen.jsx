@@ -8,7 +8,34 @@ import TextField from '../../components/form/TextField';
 import OtpInput from '../../components/form/OtpInput';
 import OtpInputField from '../../components/form/OtpInput/OtpInputField';
 import BottomDrawer from '../../components/layout/BottomDrawer';
-import { Horse, Heart, Cube } from 'phosphor-react-native';
+// import { Horse, Heart, Cube } from 'phosphor-react-native';
+import PrintSvgIcon from '../../assets/icons/print.svg'
+import Svg, { Path } from "react-native-svg"
+import PrintSvg from '../../assets/icons/PrintSvg';
+const SvgComponent = (props) => (
+  <Svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    {...props}
+  >
+    {console.log({props})}
+    <Path
+      stroke="#fff"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M8 10.5v-5h16v5M24 19.5H8V28h16v-8.5Z"
+    />
+    <Path
+      stroke="#fff"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M8 22.5H3.5v-10c0-1.1.975-2 2.162-2h20.675c1.188 0 2.163.9 2.163 2v10H24"
+    />
+    <Path fill="#fff" d="M23.5 16a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" />
+  </Svg>
+)
+
+
 const ButtonScreen = () => {
 
   const drawerRef = useRef();
@@ -20,7 +47,7 @@ const ButtonScreen = () => {
   return (
     <View style={{flex: 1}} >
     <ScrollView style={styles.container}>
-    <Horse />
+    <SvgComponent width={32} height={32} />
       <Typography>Button Examples</Typography>
       <TextField/>
       <OtpInputField/>
@@ -37,9 +64,10 @@ const ButtonScreen = () => {
         <Button title='small' size='small' />
         <Button title='mini' size='mini' />
         <View style={{ flexDirection: 'row', gap: 12 , backgroundColor : colors.grayLight}} >
-          <IconButton icon={Heart} size='medium' />
-          <IconButton icon={Cube}  size='large' />
-          {/* <Image style={{width: 32, height : 32}} source={require('../../assets/icons/PrintSvg.jsx')} /> */}
+          <IconButton icon={PrintSvg} size='medium' variant='outlined' />
+          <IconButton icon={PrintSvgIcon} size='large' />
+          {/* <IconButton icon={Cube}  size='large' /> */}
+          {/* <Image style={{width: 32, height : 32}} source={require('../../assets/icons/PrintSvgIcon.jsx')} /> */}
         </View>
       </View>
       <View style={{ gap: 8 }} >

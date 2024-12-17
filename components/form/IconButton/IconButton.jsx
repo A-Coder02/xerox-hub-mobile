@@ -31,7 +31,7 @@ const IconButton = ({
             disabled={disabled}
         >
             <View>
-                {Icon ? <Icon color={variantStyle.icon.color} weight="light" size={iconStyle.size} /> : null}
+                {Icon ? <Icon color={variantStyle.icon.color} weight="light" size={iconStyle.size} height={iconStyle.size} width={iconStyle.size}/> : null}
             </View>
         </TouchableHighlight>
     );
