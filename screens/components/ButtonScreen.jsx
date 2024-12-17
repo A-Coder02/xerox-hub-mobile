@@ -49,7 +49,7 @@ const ButtonScreen = () => {
     <ScrollView style={styles.container}>
     <SvgComponent width={32} height={32} />
       <Typography>Button Examples</Typography>
-      <TextField/>
+      <TextField startIcon={PrintSvg} endIcon={PrintSvg} />
       <OtpInputField/>
       <View style={{ gap: 8 }} >
         <Typography>Sizes</Typography>
