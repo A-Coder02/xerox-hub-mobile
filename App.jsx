@@ -24,7 +24,6 @@ export default function App() {
       <Provider store={store}>
         <SafeAreaProvider>
           <StatusBar translucent backgroundColor="transparent" />
-          <StatusBar translucent backgroundColor="transparent" />
           <View style={{ flex: 1 }} >
             <NavigationContainer>
               <AppNavigations />
