@@ -8,7 +8,7 @@ const BottomDrawer = forwardRef((props, ref) => {
     // Memoized callbacks for internal use
     const handleSheetChanges = useCallback((index) => {
         console.log('Sheet changed to index:', index);
-        if(index !== -1) {
+        if (index !== -1) {
             setIsOpen(true)
         }
         else {
@@ -45,20 +45,20 @@ const BottomDrawer = forwardRef((props, ref) => {
     }));
 
     return (
-            <BottomSheet
-                containerStyle={{backgroundColor : isOpen ? '#8c8c8c4a' : null}}
-                backgroundStyle={{ borderTopLeftRadius : 16, borderTopRightRadius : 16}}
-                index={-1}
-                handleIndicatorStyle={styles.handleIndicator}
-                enablePanDownToClose
-                snapPoints={[1, 500, '80%', '95%', '100%']}
-                ref={bottomSheetRef}
-                onChange={handleSheetChanges}
-            >
-                <BottomSheetView style={styles.contentContainer}>
-                   {props.children}
-                </BottomSheetView>
-            </BottomSheet>
+        <BottomSheet
+            containerStyle={{ backgroundColor: isOpen ? '#8c8c8c4a' : null }}
+            backgroundStyle={{ borderTopLeftRadius: 16, borderTopRightRadius: 16 }}
+            index={-1}
+            handleIndicatorStyle={styles.handleIndicator}
+            enablePanDownToClose
+            snapPoints={[1, 500, '80%', '95%', '100%']}
+            ref={bottomSheetRef}
+            onChange={handleSheetChanges}
+        >
+            <BottomSheetView style={styles.contentContainer}>
+                {props.children}
+            </BottomSheetView>
+        </BottomSheet>
     );
 });
 
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'grey',
     },
     handleIndicator: {
-        display : 'none'
+        display: 'none'
     },
     contentContainer: {
         flex: 1,
