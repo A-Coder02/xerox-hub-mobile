@@ -58,7 +58,7 @@ export default function AppNavigations() {
     <Stack.Navigator screenOptions={{
       headerShown: false
     }}
-      initialRouteName='Home'
+      initialRouteName='Typography'
     >
       {isSignedIn ? (
         <>
