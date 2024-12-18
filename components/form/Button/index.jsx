@@ -19,7 +19,7 @@ const Button = ({
     color = 'primary',
     disabled = false,
     onPress = () => { },
-    style = {button : {}, text : {}}
+    style = { button: {}, text: {} }
 }) => {
     const { buttonStyle, textStyle } = getSize(size, color, disabled);
     const variantStyle = getVariant(disabled ? "disabled" : variant)
@@ -116,7 +116,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         marginVertical: 5,
-        borderWidth: 1
+        borderWidth: 1,
+        minWidth: 90
     },
     text: {
         fontWeight: '500',
