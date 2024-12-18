@@ -3,7 +3,7 @@ import { TextInput, View, StyleSheet } from 'react-native';
 import colors from '../../../utils/colors';
 
 const TextField = forwardRef(
-  ({ value, label, onChange, startIcon: StartIcon, endIcon: EndIcon, style, placeholderTextColor, autoFocus }, ref = null) => {
+  ({ value, label, onChange, startIcon: StartIcon, endIcon: EndIcon, style, placeholderTextColor, autoFocus }, ref) => {
     return (
       <View style={[styles.container, style]}>
         {StartIcon && (
