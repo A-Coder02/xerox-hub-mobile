@@ -54,7 +54,7 @@ const getVariant = (variant, color, fontSize, fontWeight) => {
     fontSize: fontSize || defaultFontSize,
     fontWeight: fontWeight || defaultFontWeight,
     color: colorValue,
-    fontFamily: getFontFamily(fontWeight)
+    fontFamily: getFontFamily(fontWeight || defaultFontWeight)
   };
 };
 
