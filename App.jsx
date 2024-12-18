@@ -17,21 +17,21 @@ export default function App() {
     Platform.OS === 'android' && StatusBar.setBackgroundColor('transparent');
     StatusBar.setTranslucent(true);
   }, []);
-  
+
   return (
     <>
-    <GestureHandlerRootView style={{flex: 1}} >
-      <Provider store={store}>
-        <SafeAreaProvider>
-          <StatusBar translucent backgroundColor="transparent" />
-          <StatusBar translucent backgroundColor="transparent" />
-          <View style={{ flex: 1 }} >
-            <NavigationContainer>
-              <AppNavigations />
-            </NavigationContainer>
-          </View>
-        </SafeAreaProvider>
-      </Provider>
+      <GestureHandlerRootView style={{ flex: 1 }} >
+        <Provider store={store}>
+          <SafeAreaProvider>
+            <StatusBar translucent backgroundColor="transparent" />
+            <StatusBar translucent backgroundColor="transparent" />
+            <View style={{ flex: 1, }} >
+              <NavigationContainer>
+                <AppNavigations />
+              </NavigationContainer>
+            </View>
+          </SafeAreaProvider>
+        </Provider>
       </GestureHandlerRootView>
 
     </>

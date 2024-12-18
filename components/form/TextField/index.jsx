@@ -2,12 +2,13 @@ import React from 'react';
 import { Text, TextInput, View, StyleSheet } from 'react-native';
 import colors from '../../../utils/colors';
 
-const TextField = ({ value, label, onChange, startIcon, endIcon, style }) => {
+const TextField = ({ value, label, onChange, startIcon: StartIcon, endIcon: EndIcon, style }) => {
   return (
     <View style={[styles.container, style]}>
-      {startIcon && (
+      {StartIcon && (
         <View style={styles.startIconContainer}>
-          <Text style={styles.iconStyle}>S</Text>
+          {/* <Text style={styles.iconStyle}>S</Text> */}
+          <StartIcon {...styles.iconStyle} />
         </View>
       )}
       <TextInput
@@ -17,9 +18,10 @@ const TextField = ({ value, label, onChange, startIcon, endIcon, style }) => {
         onChangeText={onChange}
         placeholderTextColor={colors.placeholder}
       />
-      {endIcon && (
+      {EndIcon && (
         <View style={styles.endIconContainer}>
-          <Text style={styles.iconStyle}>E</Text>
+          <EndIcon {...styles.iconStyle} />
+
         </View>
       )}
     </View>
@@ -44,7 +46,7 @@ const styles = StyleSheet.create({
     paddingLeft: 0,
   },
   iconStyle: {
-    backgroundColor: colors.grayDark,
+    color: colors.grayDark,
     width: 32,
     height: 32,
   },
