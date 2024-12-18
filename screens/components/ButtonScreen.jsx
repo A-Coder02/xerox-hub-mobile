@@ -18,7 +18,7 @@ const SvgComponent = (props) => (
     fill="none"
     {...props}
   >
-    {console.log({props})}
+    {console.log({ props })}
     <Path
       stroke="#fff"
       strokeLinecap="round"
@@ -40,57 +40,57 @@ const ButtonScreen = () => {
 
   const drawerRef = useRef();
 
-  useEffect(()=>{
-    console.log({drawerRef})
-  },[])
+  useEffect(() => {
+    console.log({ drawerRef })
+  }, [])
 
   return (
-    <View style={{flex: 1}} >
-    <ScrollView style={styles.container}>
-    <SvgComponent width={32} height={32} />
-      <Typography>Button Examples</Typography>
-      <TextField startIcon={PrintSvg} endIcon={PrintSvg} />
-      <OtpInputField/>
-      <View style={{ gap: 8 }} >
-        <Typography>Sizes</Typography>
-        <Button title='Default (Medium)' onPress={()=> {
-          // drawerRef.current.open()
-          drawerRef.current.snapToIndex(2)
-          // drawerRef.current.snapToIndex(1)
-          // drawerRef.current.close()
-        }} />
-        <Button title='Medium' size='medium' />
-        <Button title='Large' size='large' />
-        <Button title='small' size='small' />
-        <Button title='mini' size='mini' />
-        <View style={{ flexDirection: 'row', gap: 12 , backgroundColor : colors.grayLight}} >
-          <IconButton icon={PrintSvg} size='medium' variant='outlined' />
-          <IconButton icon={PrintSvgIcon} size='large' />
-          {/* <IconButton icon={Cube}  size='large' /> */}
-          {/* <Image style={{width: 32, height : 32}} source={require('../../assets/icons/PrintSvgIcon.jsx')} /> */}
+    <View style={{ flex: 1 }} >
+      <ScrollView style={styles.container}>
+        <SvgComponent width={32} height={32} />
+        <Typography>Button Examples</Typography>
+        <TextField startIcon={PrintSvg} endIcon={PrintSvg} />
+        <OtpInputField />
+        <View style={{ gap: 8 }} >
+          <Typography>Sizes</Typography>
+          <Button title='Default (Medium)' onPress={() => {
+            // drawerRef.current.open()
+            drawerRef.current.snapToIndex(2)
+            // drawerRef.current.snapToIndex(1)
+            // drawerRef.current.close()
+          }} />
+          <Button title='Medium' size='medium' />
+          <Button title='Large' size='large' />
+          <Button title='small' size='small' />
+          <Button title='mini' size='mini' />
+          <View style={{ flexDirection: 'row', gap: 12, backgroundColor: colors.grayLight }} >
+            <IconButton icon={PrintSvg} size='medium' variant='outlined' />
+            <IconButton icon={PrintSvgIcon} size='large' />
+            {/* <IconButton icon={Cube}  size='large' /> */}
+            {/* <Image style={{width: 32, height : 32}} source={require('../../assets/icons/PrintSvgIcon.jsx')} /> */}
+          </View>
         </View>
-      </View>
-      <View style={{ gap: 8 }} >
-        <Typography>Variants</Typography>
-        <Button title='Default (Contained)' />
-        <Button title='contained' variant='contained' />
-        <Button title='outlined' variant='outlined' />
-        <Button title='outlined-dark' variant='outlined-dark' />
-        <Button title='text' variant='text' />
-        <Button title='disabled' disabled />
-        <Button title='Custom Style' style={{
-          button: {
-            backgroundColor: colors.primaryDark,
-          },
-          text: {
-            color: colors.black
-          }
-        }} />
-        <Button title='Custom Style' />
-    <BottomDrawer />
-      </View>
-    </ScrollView>
-    <BottomDrawer ref={drawerRef} />
+        <View style={{ gap: 8 }} >
+          <Typography>Variants</Typography>
+          <Button title='Default (Contained)' />
+          <Button title='contained' variant='contained' />
+          <Button title='outlined' variant='outlined' />
+          <Button title='outlined-dark' variant='outlined-dark' />
+          <Button title='text' variant='text' />
+          <Button title='disabled' disabled />
+          <Button title='Custom Style' style={{
+            button: {
+              backgroundColor: colors.primaryDark,
+            },
+            text: {
+              color: colors.black
+            }
+          }} />
+          <Button title='Custom Style' />
+          <BottomDrawer />
+        </View>
+      </ScrollView>
+      <BottomDrawer ref={drawerRef} />
     </View>
   );
 };

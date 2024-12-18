@@ -13,13 +13,13 @@ import colors from '../../utils/colors';
  * @param {number} [props.fontWeight] - Custom font weight.
  * @param {Object} [props.style] - Additional custom styles.
  */
-const Typography = ({ 
-  children, 
-  variant = 'base', 
-  color = 'black', 
-  fontSize, 
-  fontWeight, 
-  style = {} 
+const Typography = ({
+  children,
+  variant = 'base',
+  color = 'black',
+  fontSize,
+  fontWeight,
+  style = {}
 }) => {
   const variantStyle = getVariant(variant, color, fontSize, fontWeight);
   return <Text style={[variantStyle, style]}>{children}</Text>;
