@@ -15,7 +15,7 @@ function LeftArrowSvg(props) {
             <Path
                 d="M25.333 28.667L18.667 22l6.666-6.666"
                 stroke="#071731"
-                strokeWidth={2}
+                strokeWidth={1}
                 strokeLinecap="round"
                 strokeLinejoin="round"
             />
@@ -24,3 +24,4 @@ function LeftArrowSvg(props) {
 }
 
 export default LeftArrowSvg
+    ``
