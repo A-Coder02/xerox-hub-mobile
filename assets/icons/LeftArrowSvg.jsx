@@ -24,4 +24,3 @@ function LeftArrowSvg(props) {
 }
 
 export default LeftArrowSvg
-    ``

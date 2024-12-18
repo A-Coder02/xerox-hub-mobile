@@ -4,15 +4,15 @@ import LeftArrowSvg from '../../../assets/icons/LeftArrowSvg'
 import colors from '../../../utils/colors'
 import Typography from '../../typography/Typography'
 
-const AppBar = () => {
+const AppBar = ({ title }) => {
     return (
         <View style={styles.header}>
             <View style={styles.backButton}>
                 <LeftArrowSvg />
             </View>
-            <Typography color={colors.grayDark} variant="base">
-                Choose Location
-            </Typography>
+            {!!title && <Typography color={colors.grayDark} variant="base">
+                {title}
+            </Typography>}
         </View>
     )
 }
