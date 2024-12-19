@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -23,33 +23,47 @@ const ChooseLocationScreen = () => {
     ref.current.focus();
     checkGpsStatus(false); // Initial check without showing loader
   }, []);
+
   const checkGpsStatus = async (showLoader = true) => {
-    if (showLoader) setLoading(true); // Start loader
-  
+    if (showLoader) {
+      setLoading(true);
+    } // Start loader
+
     const hasPermission = await requestLocationPermission();
-  
+
     if (hasPermission) {
       Geolocation.getCurrentPosition(
         () => {
-          setIsGpsEnabled(true); // GPS is enabled
-          if (showLoader) {
-            Alert.alert('Success', 'Go to Home Screen');
-          }
+          setLoading(true); // Start loader when the GPS is enabled
+          setTimeout(() => {
+            // Add a delay for smoother transition
+            setIsGpsEnabled(true); // GPS is enabled
+            setLoading(false); // Stop loader after delay
+            if (showLoader) {
+              Alert.alert('Success', 'Go to Home Screen');
+            }
+          }, 500); // 500ms delay for smoother UI update
         },
-        (error) => {
-          setIsGpsEnabled(false); // GPS is not enabled
-          console.error('Location Error:', error);
+        error => {
+          setLoading(true); // Start loader when there’s an error
+          setTimeout(() => {
+            // Handle error with a delay
+            setIsGpsEnabled(false); // GPS is not enabled
+            setLoading(false); // Stop loader
+            // console.error('Location Error:', error);
+          }, 500);
         },
-        { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+        {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
       );
     } else {
-      setIsGpsEnabled(false); // Permission denied, GPS disabled
-      Alert.alert('Permission Denied', 'Location permission is required.');
+      setTimeout(() => {
+        // Handle permission denial
+        setIsGpsEnabled(false); // Permission denied, GPS disabled
+        setLoading(false); // Stop loader
+        Alert.alert('Permission Denied', 'Location permission is required.');
+      }, 500);
     }
-  
-    setLoading(false); // Stop loader after completion
   };
-  
 
   const requestLocationPermission = async () => {
     try {
@@ -59,7 +73,7 @@ const ChooseLocationScreen = () => {
           title: 'Location Permission',
           message: 'This app needs access to your location.',
           buttonPositive: 'OK',
-        }
+        },
       );
       return granted === PermissionsAndroid.RESULTS.GRANTED;
     } catch (err) {
@@ -85,6 +99,7 @@ const ChooseLocationScreen = () => {
               <ActivityIndicator size="small" color={colors.primary} />
             ) : isGpsEnabled ? (
               <>
+                {/* Success State */}
                 <Typography fontWeight={500} color="primary">
                   Device location enabled
                 </Typography>
@@ -102,11 +117,13 @@ const ChooseLocationScreen = () => {
               </>
             ) : (
               <>
+                {/* Error State */}
                 <Typography fontWeight={500} color="primary">
                   Device location not enabled
                 </Typography>
                 <Typography variant="caption" fontWeight={300}>
-                  Tap here to enable your device location for a better experience
+                  Tap here to enable your device location for a better
+                  experience
                 </Typography>
                 <Button
                   title="Enable"
@@ -125,7 +142,6 @@ const ChooseLocationScreen = () => {
     </Layout>
   );
 };
-
 
 const styles = StyleSheet.create({
   layout: {
