@@ -81,6 +81,7 @@ const ButtonScreen = () => {
         <Button title='Custom Style' style={{
           button: {
             backgroundColor: colors.primaryDark,
+            borderColor: colors.gray,
           },
           text: {
             color: colors.black

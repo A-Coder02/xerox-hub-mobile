@@ -18,7 +18,7 @@ const SplashScreen = () => {
       <Typography variant="caption" color="primary">
         Ab Xerox ban gaya easy!
       </Typography>
-      <MakeInIndia style={{marginTop: 300}} />
+      {/* <MakeInIndia style={{marginTop: 300}} /> */}
     </Layout>
   );
 };
