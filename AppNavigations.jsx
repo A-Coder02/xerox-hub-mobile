@@ -10,6 +10,7 @@ import Layout from './components/layout/Layout';
 import TypographyScreen from './screens/components/TypographyScreen';
 import ButtonScreen from './screens/components/ButtonScreen';
 import CreateAccount from './screens/auth/CreateAccount';
+import PreLogin from './screens/auth/PreLogin';
 const Stack = createNativeStackNavigator();
 
 const getIsSignedIn = () => {
@@ -59,8 +60,9 @@ export default function AppNavigations() {
     <Stack.Navigator screenOptions={{
       headerShown: false
     }}
-      initialRouteName='Home'
+      initialRouteName='PreLogin'
     >
+      <Stack.Screen name="PreLogin" component={PreLogin} />
       <Stack.Screen name="CreateAccount" component={CreateAccount} />
       {isSignedIn ? (
         <>
