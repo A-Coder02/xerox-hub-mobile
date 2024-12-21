@@ -3,17 +3,20 @@ import Layout from '../components/layout/Layout';
 import Typography from '../components/typography/Typography';
 import BrandSvg from '../assets/icons/BrandSvg.jsx';
 import Makeinindia from '../assets/icons/Makeinindia.jsx';
-import {View} from 'react-native';
+import MakeInIndiaPng from '../assets/images/made-in-india.png'
+import { Image, View } from 'react-native';
 
 const SplashScreen = () => {
   return (
     <Layout
       style={{
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         alignItems: 'center',
       }}>
-      <View style={{marginTop: 325, marginBottom: 'auto', alignItems: 'center',
-}}>
+      <View />
+      <View style={{
+        alignItems: 'center',
+      }}>
         <BrandSvg />
         <Typography variant="h2" color="primary">
           Zerox Cloud
@@ -22,7 +25,10 @@ const SplashScreen = () => {
           Ab Xerox ban gaya easy!
         </Typography>
       </View>
-      <Makeinindia style={{marginTop: 'auto', marginBottom: 40}} />
+      <Image source={(MakeInIndiaPng)} style={{
+        width: 112,
+        objectFit: 'contain'
+      }} />
     </Layout>
   );
 };
