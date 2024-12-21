@@ -42,14 +42,14 @@ export default function AppNavigations() {
     }
   }, [netInfo, navigation])
 
-  React.useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000)
-    return () => {
-      clearTimeout(timer);
-    }
-  }, [])
+  // React.useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setIsLoading(false);
+  //   }, 2000)
+  //   return () => {
+  //     clearTimeout(timer);
+  //   }
+  // }, [])
 
   if (isLoading) {
     return <SplashScreen />
