@@ -10,6 +10,7 @@ import Layout from './components/layout/Layout';
 import TypographyScreen from './screens/components/TypographyScreen';
 import ButtonScreen from './screens/components/ButtonScreen';
 import CreateAccount from './screens/auth/CreateAccount';
+import PreLogin from './screens/auth/PreLogin';
 const Stack = createNativeStackNavigator();
 
 const getIsSignedIn = () => {
@@ -42,14 +43,14 @@ export default function AppNavigations() {
     }
   }, [netInfo, navigation])
 
-  // React.useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setIsLoading(false);
-  //   }, 2000)
-  //   return () => {
-  //     clearTimeout(timer);
-  //   }
-  // }, [])
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000)
+    return () => {
+      clearTimeout(timer);
+    }
+  }, [])
 
   if (isLoading) {
     return <SplashScreen />
@@ -59,8 +60,9 @@ export default function AppNavigations() {
     <Stack.Navigator screenOptions={{
       headerShown: false
     }}
-      initialRouteName='Home'
+      initialRouteName='PreLogin'
     >
+      <Stack.Screen name="PreLogin" component={PreLogin} />
       <Stack.Screen name="CreateAccount" component={CreateAccount} />
       {isSignedIn ? (
         <>
