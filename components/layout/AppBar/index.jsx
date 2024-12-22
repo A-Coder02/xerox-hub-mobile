@@ -4,7 +4,13 @@ import LeftArrowSvg from '../../../assets/icons/LeftArrowSvg';
 import colors from '../../../utils/colors';
 import Typography from '../../typography/Typography';
 
-const AppBar = ({title, isBottomSheet = false, onNavigate = () => {}}) => {
+const AppBar = ({
+  title,
+  isBottomSheet = false,
+  onNavigate = () => {},
+  textColor = colors.grayDark,
+  textVariant = 'base',
+}) => {
   return (
     <View
       style={[
@@ -26,7 +32,7 @@ const AppBar = ({title, isBottomSheet = false, onNavigate = () => {}}) => {
         ]}>
         <LeftArrowSvg />
       </TouchableHighlight>
-      <Typography color={colors.grayDark} style={{flex: 1}} variant="base">
+      <Typography color={textColor} style={{flex: 1}} variant={textVariant}>
         {title}
       </Typography>
     </View>

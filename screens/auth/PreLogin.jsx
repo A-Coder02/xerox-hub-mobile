@@ -88,16 +88,18 @@ const PreLogin = () => {
       </View>
 
       <BottomDrawer ref={drawerRef}>
-        <CreateAccount onNavigate = {()=>{
-          drawerRef.current?.close()
-        }}/>
+        <CreateAccount
+          onNavigate={() => {
+            drawerRef.current?.close();
+          }}
+        />
       </BottomDrawer>
     </Layout>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {flex: 1,marginVertical: 30, justifyContent: 'space-between'},
+  container: {flex: 1, marginVertical: 30, justifyContent: 'space-between'},
   buttonContainer: {
     paddingHorizontal: 20,
     gap: 12,

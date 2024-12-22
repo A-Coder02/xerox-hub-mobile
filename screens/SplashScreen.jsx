@@ -2,7 +2,6 @@ import React from 'react';
 import Layout from '../components/layout/Layout';
 import Typography from '../components/typography/Typography';
 import BrandSvg from '../assets/icons/BrandSvg.jsx';
-import Makeinindia from '../assets/icons/Makeinindia.jsx';
 import MakeInIndiaPng from '../assets/images/made-in-india.png'
 import { Image, View } from 'react-native';
 
