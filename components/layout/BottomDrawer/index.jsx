@@ -1,6 +1,7 @@
 import React, { forwardRef, useCallback, useImperativeHandle, useRef, useState } from 'react';
 import { StyleSheet } from 'react-native';
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
+import Typography from '../../typography/Typography';
 const BottomDrawer = forwardRef((props, ref) => {
     const bottomSheetRef = useRef(null);
     const [isOpen, setIsOpen] = useState(false)
@@ -69,14 +70,16 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'grey',
+
     },
     handleIndicator: {
-        display: 'none'
+        display: 'none',
+
     },
     contentContainer: {
         flex: 1,
-        padding: 36,
-        alignItems: 'center',
+        paddingHorizontal : 32,
+
     },
 });
 
