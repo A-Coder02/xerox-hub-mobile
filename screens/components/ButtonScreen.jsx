@@ -58,7 +58,7 @@ const ButtonScreen = () => {
           <Typography>Sizes</Typography>
           <Button title='Default (Medium)' onPress={() => {
             // drawerRef.current.open()
-            drawerRef.current.snapToIndex(2)
+            drawerRef.current.snapToIndex(0)
             // drawerRef.current.snapToIndex(1)
             // drawerRef.current.close()
           }} />
