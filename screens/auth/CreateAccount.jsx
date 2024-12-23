@@ -9,35 +9,38 @@ import Button from '../../components/form/Button';
 import MobileSvg from '../../assets/icons/MobileSvg';
 
 const CreateAccount = ({onNavigate}) => {
-  const {container, textFieldContainer, buttonContainer} = styles;
+  const {container, formContainer,textFieldContainer, buttonContainer} = styles;
   return (
     <View style={container}>
-      <View>
-        <AppBar
-          title="Create Account"
-          isBottomSheet
-          onNavigate={onNavigate}
-          textColor={colors.primary}
-          textVariant="h2"
-        />
-        <Typography variant="h3" fontWeight={400} color="grayDark">
-          To use services, please create account
-        </Typography>
-      </View>
-      <View style={textFieldContainer}>
-        <TextField startIcon={MailSvg} label="Enter Email" />
-        <TextField startIcon={UserSvg} label="Enter Name" />
-        <TextField prefix="+91" label="Enter Mobile Number" />
+      <View style={formContainer}>
+        <View>
+          <AppBar
+            title="Create Account"
+            isBottomSheet
+            onNavigate={onNavigate}
+            textColor={colors.primary}
+            textVariant="h2"
+          />
+          <Typography style={{paddingVertical: 10}} variant="h3" fontWeight={400} color="grayDark">
+            To use services, please create account
+          </Typography>
+        </View>
+        <View style={textFieldContainer}>
+          <TextField startIcon={MailSvg} label="Enter Email" />
+          <TextField startIcon={UserSvg} label="Enter Name" />
+          <TextField prefix="+91" label="Enter Mobile Number" />
+        </View>
       </View>
       <View style={buttonContainer}>
-        <Button title="Large" size="large" />
+        <Button title="Create Account" size="large" />
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {marginTop: 30, gap: 30},
+  container: {gap: 30},
+  formContainer: {paddingVertical: 20},
   textFieldContainer: {
     gap: 32,
   },
