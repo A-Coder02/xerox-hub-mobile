@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import Typography from '../../components/typography/Typography';
 import Layout from '../../components/layout/Layout';
 import BrandSvg from '../../assets/icons/BrandSvg';
@@ -7,15 +7,18 @@ import {Pressable, StyleSheet, View} from 'react-native';
 import Button from '../../components/form/Button';
 import BottomDrawer from '../../components/layout/BottomDrawer';
 import CreateAccount from './CreateAccount';
+import Login from './Login';
 
 const PreLogin = () => {
   const drawerRef = useRef();
+  const [activeComponent, setActiveComponent] = useState(null); // State to track the active component
 
   useEffect(() => {
     console.log({drawerRef});
   }, []);
 
-  const openDrawer = () => {
+  const openDrawer = (component) => {
+    setActiveComponent(component); // Set the active component ('login' or 'createAccount')
     drawerRef.current?.snapToIndex(1); // Open drawer to Index 1
   };
 
@@ -62,10 +65,10 @@ const PreLogin = () => {
             title="Login with Phone Number"
             size="large"
             variant="outlined-dark"
-            onPress={openDrawer}
+            onPress={() => openDrawer('login')} // Pass 'login' to open the Login component
           />
           <Pressable
-            onPress={openDrawer}
+            onPress={() => openDrawer('createAccount')} // Pass 'createAccount' to open the CreateAccount component
             style={({pressed}) => [
               {
                 flexDirection: 'row',
@@ -88,11 +91,20 @@ const PreLogin = () => {
       </View>
 
       <BottomDrawer ref={drawerRef}>
-        <CreateAccount
-          onNavigate={() => {
-            drawerRef.current?.close();
-          }}
-        />
+        {activeComponent === 'login' && (
+          <Login
+            onNavigate={() => {
+              drawerRef.current?.close();
+            }}
+          />
+        )}
+        {activeComponent === 'createAccount' && (
+          <CreateAccount
+            onNavigate={() => {
+              drawerRef.current?.close();
+            }}
+          />
+        )}
       </BottomDrawer>
     </Layout>
   );
