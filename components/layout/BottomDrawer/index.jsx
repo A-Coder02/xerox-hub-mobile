@@ -51,7 +51,7 @@ const BottomDrawer = forwardRef((props, ref) => {
             backgroundStyle={{ borderTopLeftRadius: 16, borderTopRightRadius: 16 }}
             index={-1}
             handleIndicatorStyle={styles.handleIndicator}
-            enablePanDownToClose
+            // enablePanDownToClose
             snapPoints={[1, 500, '80%', '95%', '100%']}
             ref={bottomSheetRef}
             onChange={handleSheetChanges}

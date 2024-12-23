@@ -6,10 +6,10 @@ import TextField from '../../components/form/TextField';
 import MailSvg from '../../assets/icons/MailSvg';
 import UserSvg from '../../assets/icons/UserSvg';
 import Button from '../../components/form/Button';
-import MobileSvg from '../../assets/icons/MobileSvg';
 
 const CreateAccount = ({onNavigate}) => {
-  const {container, formContainer,textFieldContainer, buttonContainer} = styles;
+  const {container, formContainer, textFieldContainer, buttonContainer} =
+    styles;
   return (
     <View style={container}>
       <View style={formContainer}>
@@ -21,7 +21,11 @@ const CreateAccount = ({onNavigate}) => {
             textColor={colors.primary}
             textVariant="h2"
           />
-          <Typography style={{paddingVertical: 10}} variant="h3" fontWeight={400} color="grayDark">
+          <Typography
+            style={{paddingVertical: 10}}
+            variant="h3"
+            fontWeight={400}
+            color="grayDark">
             To use services, please create account
           </Typography>
         </View>
@@ -40,7 +44,7 @@ const CreateAccount = ({onNavigate}) => {
 
 const styles = StyleSheet.create({
   container: {gap: 30},
-  formContainer: {paddingVertical: 20},
+  formContainer: {paddingVertical: 20, height: 350},
   textFieldContainer: {
     gap: 32,
   },
