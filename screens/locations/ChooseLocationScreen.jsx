@@ -15,22 +15,22 @@ const ChooseLocationScreen = () => {
   const ref = useRef();
   const [isGpsEnabled, setIsGpsEnabled] = useState(null); // Initial state is `null` (unknown)
   const [loading, setLoading] = useState(false); // Loader state
-  const [addresses, setAddresses] = useState([]); // State to hold addresses
+  const [recentLocations, setRecentLocations] = useState([]); // State to hold recent_locations
 
   useEffect(() => {
     ref.current.focus();
     checkGpsStatus(false); // Initial check without showing loader
-    fetchAddresses(); // Fetch addresses from AsyncStorage
+    fetchAddresses(); // Fetch recent_locations from AsyncStorage
   }, []);
 
   const { height } = Dimensions.get('window');
 
-  // Function to fetch addresses from AsyncStorage
+  // Function to fetch recent_locations from AsyncStorage
   const fetchAddresses = async () => {
     try {
-      const storedAddresses = await AsyncStorage.getItem('addresses');
+      const storedAddresses = await AsyncStorage.getItem('recent_locations');
       if (storedAddresses) {
-        setAddresses(JSON.parse(storedAddresses));
+        setRecentLocations(JSON.parse(storedAddresses));
       } else {
         const defaultAddresses = [
           'Indira Nagar, Yerwada, Pune, Maharashtra, 411006',
@@ -46,11 +46,11 @@ const ChooseLocationScreen = () => {
           'Kothrud, Pune, Maharashtra, 411038',
           'Aundh, Pune, Maharashtra, 411007',
         ];
-        setAddresses(defaultAddresses);
-        await AsyncStorage.setItem('addresses', JSON.stringify(defaultAddresses));
+        setRecentLocations(defaultAddresses);
+        await AsyncStorage.setItem('recent_locations', JSON.stringify(defaultAddresses));
       }
     } catch (error) {
-      console.error('Error fetching or storing addresses:', error);
+      console.error('Error fetching or storing recent_locations:', error);
     }
   };
 
@@ -113,11 +113,11 @@ const ChooseLocationScreen = () => {
 
   const clearAddresses = async () => {
     try {
-      await AsyncStorage.removeItem('addresses');
-      setAddresses([]);
+      await AsyncStorage.removeItem('recentLocations');
+      setRecentLocations([]);
       console.log('Addresses cleared successfully!');
     } catch (error) {
-      console.error('Error clearing addresses:', error);
+      console.error('Error clearing recentLocations:', error);
     }
   };
 
@@ -172,7 +172,7 @@ const ChooseLocationScreen = () => {
           </View>
         </View>
 
-        {addresses.length > 0 && <View style={styles.addressContainer}>
+        {recentLocations.length > 0 && <View style={styles.addressContainer}>
           <View style={styles.titleContainer}>
             <Typography fontSize={18} style={styles.recentLocationsTitle}>
               Recent Locations
@@ -188,7 +188,7 @@ const ChooseLocationScreen = () => {
           </View>
 
           <ScrollView style={styles.scrollView}>
-            {addresses.map((address, index) => (
+            {recentLocations.map((address, index) => (
               <Pressable
                 key={index}
                 onPress={() => {
@@ -277,7 +277,6 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flex: 1, // Make ScrollView flexible
-    paddingTop: 8, // Adjust top padding to match layout style
   },
   divider: {
     height: 1,
