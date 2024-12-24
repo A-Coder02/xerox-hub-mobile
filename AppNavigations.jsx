@@ -11,6 +11,7 @@ import TypographyScreen from './screens/components/TypographyScreen';
 import ButtonScreen from './screens/components/ButtonScreen';
 import CreateAccount from './screens/auth/CreateAccount';
 import PreLogin from './screens/auth/PreLogin';
+import ChooseLocationScreen from './screens/locations/ChooseLocationScreen';
 const Stack = createNativeStackNavigator();
 
 const getIsSignedIn = () => {
