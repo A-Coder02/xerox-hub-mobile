@@ -219,7 +219,7 @@ const ChooseLocationScreen = () => {
 const styles = StyleSheet.create({
   layout: {
     padding: 20,
-    paddingTop: 55,
+    // paddingTop: 55,
   },
   content: {
     marginTop: 20,
