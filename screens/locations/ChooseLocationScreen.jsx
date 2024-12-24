@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   StyleSheet,
   View,
@@ -14,6 +14,7 @@ import MapPinSvg from '../../assets/icons/MapPinSvg';
 import TextField from '../../components/form/TextField';
 import SearchSvg from '../../assets/icons/SearchSvg';
 import Button from '../../components/form/Button';
+import AppBar from '../../components/layout/AppBar';
 const ChooseLocationScreen = () => {
   const ref = useRef();
   const [isGpsEnabled, setIsGpsEnabled] = useState(null); // Initial state is `null` (unknown)
@@ -53,7 +54,7 @@ const ChooseLocationScreen = () => {
             // console.error('Location Error:', error);
           }, 500);
         },
-        {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
+        { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 },
       );
     } else {
       setTimeout(() => {
@@ -84,6 +85,7 @@ const ChooseLocationScreen = () => {
 
   return (
     <Layout style={styles.layout}>
+      <AppBar title={'Choose Location'} />
       <View style={styles.content}>
         <TextField
           ref={ref}
@@ -95,7 +97,7 @@ const ChooseLocationScreen = () => {
         <View style={styles.gpsContainer}>
           <MapPinSvg style={styles.mapPin} />
           <View style={styles.gpsTextContainer}>
-            {loading || isGpsEnabled === null ? (
+            {!loading || isGpsEnabled === null ? (
               <ActivityIndicator size="small" color={colors.primary} />
             ) : isGpsEnabled ? (
               <>
@@ -103,13 +105,13 @@ const ChooseLocationScreen = () => {
                 <Typography fontWeight={500} color="primary">
                   Device location enabled
                 </Typography>
-                <Typography variant="caption" fontWeight={300}>
+                <Typography variant="caption" fontWeight={300} color='grayDark'>
                   Tap here to use your device location for a better experience
                 </Typography>
                 <Button
                   title="Use Current Location"
                   variant="outlined"
-                  size="mini"
+                  size="small"
                   style={{
                     button: styles.enableButton,
                   }}
@@ -121,14 +123,14 @@ const ChooseLocationScreen = () => {
                 <Typography fontWeight={500} color="primary">
                   Device location not enabled
                 </Typography>
-                <Typography variant="caption" fontWeight={300}>
+                <Typography variant="caption" fontWeight={300} color='grayDark' >
                   Tap here to enable your device location for a better
                   experience
                 </Typography>
                 <Button
                   title="Enable"
                   variant="outlined"
-                  size="mini"
+                  size="small"
                   onPress={() => checkGpsStatus(true)} // Show loader when enabling location
                   style={{
                     button: styles.enableButton,
