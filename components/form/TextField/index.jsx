@@ -1,16 +1,37 @@
 import React, { forwardRef } from 'react';
-import { TextInput, View, StyleSheet } from 'react-native';
+import { TextInput, View, StyleSheet, Text } from 'react-native';
 import colors from '../../../utils/colors';
 
 const TextField = forwardRef(
-  ({ value, label, onChange, startIcon: StartIcon, endIcon: EndIcon, style, placeholderTextColor, autoFocus }, ref) => {
+  (
+    {
+      value,
+      label,
+      onChange,
+      startIcon: StartIcon,
+      endIcon: EndIcon,
+      prefix, // New prop for text prefix
+      style,
+      placeholderTextColor,
+      autoFocus
+    },
+    ref
+  ) => {
     return (
       <View style={[styles.container, style]}>
+        {/* Render StartIcon */}
         {StartIcon && (
           <View style={styles.startIconContainer}>
             <StartIcon {...styles.iconStyle} />
           </View>
         )}
+        {/* Render Prefix */}
+        {prefix && (
+          <Text style={styles.prefixText}>
+            {prefix}
+          </Text>
+        )}
+        {/* Text Input */}
         <TextInput
           ref={ref}
           style={styles.input}
@@ -20,6 +41,7 @@ const TextField = forwardRef(
           placeholderTextColor={placeholderTextColor || colors.placeholder}
           autoFocus={autoFocus}
         />
+        {/* Render EndIcon */}
         {EndIcon && (
           <View style={styles.endIconContainer}>
             <EndIcon {...styles.iconStyle} />
@@ -38,14 +60,17 @@ const styles = StyleSheet.create({
     borderColor: colors.gray,
     borderRadius: 8,
     overflow: 'hidden',
+    alignItems: 'center', // Ensure proper alignment
   },
   startIconContainer: {
+    backgroundColor: colors.whiteLight,
     padding: 8,
     paddingRight: 0,
     justifyContent: 'center',
     alignItems: 'center',
   },
   endIconContainer: {
+    backgroundColor: colors.whiteLight,
     padding: 8,
     paddingLeft: 0,
     justifyContent: 'center',
@@ -53,15 +78,24 @@ const styles = StyleSheet.create({
   },
   iconStyle: {
     color: colors.grayDark,
+    width: 24,
+    height: 24,
+  },
+  prefixText: {
+    backgroundColor: colors.whiteLight,
+    color: colors.grayDark,
+    fontSize: 16,
     width: 32,
-    height: 32,
+    padding: 8,
+    paddingRight: 0,
+
   },
   input: {
     flex: 1,
     paddingVertical: 10,
     paddingHorizontal: 8,
     color: colors.black,
-    backgroundColor: colors.white
+    backgroundColor: colors.whiteLight
   },
 });
 
