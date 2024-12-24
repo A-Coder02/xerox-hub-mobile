@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import Typography from '../../components/typography/Typography';
 import AppBar from '../../components/layout/AppBar';
@@ -6,8 +6,15 @@ import TextField from '../../components/form/TextField';
 import Button from '../../components/form/Button';
 
 const Login = ({onNavigate}) => {
-  const {container, formContainer, textFieldContainer, buttonContainer} =
-    styles;
+  const [mobile, setMobile] = useState('');
+ 
+  const handleLogin = () => {
+    // Handle login logic
+    console.log('Mobile:', mobile);
+  };
+
+  const {container, formContainer, textFieldContainer} = styles;
+
   return (
     <View style={container}>
       <View style={formContainer}>
@@ -20,19 +27,25 @@ const Login = ({onNavigate}) => {
             textVariant="h2"
           />
           <Typography
-            style={{paddingVertical: 10}}
-            variant="h3"
-            fontWeight={400}
+            style={{paddingBottom: 8, marginBottom: 32}}
+            variant="caption"
             color="grayDark">
             To use services, please login
           </Typography>
         </View>
         <View style={textFieldContainer}>
-          <TextField prefix="+91" label="Enter Mobile Number" />
+          {/* Input for Mobile Number */}
+          <TextField
+            prefix="+91"
+            label="Enter Mobile Number"
+            value={mobile}
+            onChange={setMobile} // Update mobile state
+            />
         </View>
       </View>
-      <View style={buttonContainer}>
-        <Button title="Login" size="large" />
+      <View>
+        {/* Button to trigger login */}
+        <Button title="Login" size="large" onPress={handleLogin} />
       </View>
     </View>
   );
@@ -40,12 +53,10 @@ const Login = ({onNavigate}) => {
 
 const styles = StyleSheet.create({
   container: {gap: 30},
-  formContainer: {paddingVertical: 20, height: 350},
+  formContainer: {height: 350},
   textFieldContainer: {
     gap: 32,
   },
-  buttonContainer: {
-    paddingHorizontal: 5,
-  },
 });
+
 export default Login;

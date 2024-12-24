@@ -17,7 +17,7 @@ const PreLogin = () => {
     console.log({drawerRef});
   }, []);
 
-  const openDrawer = (component) => {
+  const openDrawer = component => {
     setActiveComponent(component); // Set the active component ('login' or 'createAccount')
     drawerRef.current?.snapToIndex(1); // Open drawer to Index 1
   };
@@ -36,7 +36,7 @@ const PreLogin = () => {
             fontSize={64}
             fontWeight={400}
             color="primary"
-            style={{top: -24}}>
+            style={{top: -40}}>
             Everyone
           </Typography>
         </View>
@@ -45,7 +45,7 @@ const PreLogin = () => {
             <Button
               title="Login with Google"
               size="large"
-              variant="outlined"
+              variant="outlined-dark"
               style={{
                 button: {
                   borderColor: colors.gray,
@@ -57,8 +57,7 @@ const PreLogin = () => {
           <Typography
             style={{textAlign: 'center'}}
             fontSize={17}
-            fontWeight={500}
-            color="black">
+            fontWeight={400}>
             OR
           </Typography>
           <Button
@@ -111,17 +110,14 @@ const PreLogin = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {flex: 1, marginVertical: 30, justifyContent: 'space-between'},
+  container: {flex: 1, marginBottom: 32, justifyContent: 'space-between'},
   buttonContainer: {
-    paddingHorizontal: 20,
+    alignItems: 'center',
     gap: 12,
   },
   textAlignment: {
     textAlign: 'center',
-    marginTop: 10,
-  },
-  googleButton: {
-    paddingHorizontal: 50,
+    marginTop: 8,
   },
 });
 export default PreLogin;
