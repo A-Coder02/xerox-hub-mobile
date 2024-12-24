@@ -9,9 +9,8 @@ import NoInternetScreen from './screens/NoInternet';
 import Layout from './components/layout/Layout';
 import TypographyScreen from './screens/components/TypographyScreen';
 import ButtonScreen from './screens/components/ButtonScreen';
-import ChooseLocationScreen2 from './screens/locations/ChooseLocationScreen2';
-import ChooseLocationScreen from './screens/locations/ChooseLocationScreen';
-
+import CreateAccount from './screens/auth/CreateAccount';
+import PreLogin from './screens/auth/PreLogin';
 const Stack = createNativeStackNavigator();
 
 const getIsSignedIn = () => {
@@ -61,13 +60,16 @@ export default function AppNavigations() {
     <Stack.Navigator screenOptions={{
       headerShown: false
     }}
-      initialRouteName='ChooseLocation'
+      initialRouteName='PreLogin'
     >
+      <Stack.Screen name="PreLogin" component={PreLogin} />
+      <Stack.Screen name="CreateAccount" component={CreateAccount} />
       {isSignedIn ? (
         <>
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Profile" component={ProfileScreen} />
           <Stack.Screen name="Settings" component={SettingsScreen} />
+          <Stack.Screen name="ChooseLocation" component={ChooseLocationScreen} />
         </>
       ) : (
         <>
@@ -78,7 +80,6 @@ export default function AppNavigations() {
       <Stack.Screen name="NoInternet" component={NoInternetScreen} />
       <Stack.Screen name="Typography" component={TypographyScreen} />
       <Stack.Screen name="Button" component={ButtonScreen} />
-      <Stack.Screen name="ChooseLocation" component={ChooseLocationScreen} />
 
     </Stack.Navigator>
 
