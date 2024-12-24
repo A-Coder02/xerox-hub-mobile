@@ -6,7 +6,7 @@ const TypographyScreen = () => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Typography>Typography Examples</Typography>
-      <Typography variant="h1" color="primary">
+      <Typography variant="h1" color="primary" fontWeight={900}>
         Heading 1 (h1) - Primary Color
       </Typography>
       <Typography variant="h2" color="default">
@@ -37,7 +37,7 @@ const TypographyScreen = () => {
 const styles = StyleSheet.create({
   container: {
     padding: 20,
-    paddingTop : 32,
+    paddingTop: 32,
     flexGrow: 1,
     // justifyContent: 'center',
     flex: 1,

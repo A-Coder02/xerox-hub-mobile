@@ -51,7 +51,7 @@ export default function AppNavigations() {
     return () => {
       clearTimeout(timer);
     }
-  }, [])
+  }, []);
 
   if (isLoading) {
     return <SplashScreen />

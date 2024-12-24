@@ -51,7 +51,7 @@ const BottomDrawer = forwardRef((props, ref) => {
             index={-1}
             handleIndicatorStyle={styles.handleIndicator}
             enablePanDownToClose
-            snapPoints={[1, 500, '80%', '95%', '100%']}
+            snapPoints={[500, '80%', '95%', '100%']}
             ref={bottomSheetRef}
             onChange={handleSheetChanges}
         >
@@ -75,8 +75,7 @@ const styles = StyleSheet.create({
     },
     contentContainer: {
         flex: 1,
-        padding: 36,
-        alignItems: 'center',
+        paddingHorizontal: 16
     },
 });
 

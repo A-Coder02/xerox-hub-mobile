@@ -33,7 +33,7 @@ const TextField = forwardRef(
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    backgroundColor: colors.white,
+    backgroundColor: colors.whiteLight,
     borderWidth: 1,
     borderColor: colors.gray,
     borderRadius: 8,
@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 8,
     color: colors.black,
+    backgroundColor: colors.white
   },
 });
 
