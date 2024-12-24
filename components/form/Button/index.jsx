@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TouchableOpacity, StyleSheet, TouchableHighlight } from 'react-native';
+import { Text, TouchableOpacity, StyleSheet, TouchableHighlight, View } from 'react-native';
 import colors from '../../../utils/colors';
 
 /**
@@ -19,11 +19,12 @@ const Button = ({
     color = 'primary',
     disabled = false,
     onPress = () => { },
-    style = { button: {}, text: {} }
+    style = { button: {}, text: {} },
+    startIcon: StartIcon = null
 }) => {
-    const { buttonStyle, textStyle } = getSize(size, color, disabled);
+    const { buttonStyle, textStyle, iconStyle } = getSize(size, color, disabled);
     const variantStyle = getVariant(disabled ? "disabled" : variant)
-
+    console.log({ iconStyle })
     return (
         <TouchableHighlight
             underlayColor={variantStyle.underlayColor}
@@ -31,7 +32,22 @@ const Button = ({
             onPress={onPress}
             disabled={disabled}
         >
-            <Text style={[styles.text, variantStyle.text, textStyle, style.text]}>{title}</Text>
+            <View style={{
+                flexDirection: 'row', alignItems: 'center',
+                gap: buttonStyle.gap
+            }} >
+                {StartIcon && (
+                    <View style={styles.startIconContainer}>
+                        <StartIcon
+                            color={variantStyle.icon.color}
+                            {...{
+                                width: iconStyle.width,
+                                height: iconStyle.width,
+                            }} />
+                    </View>
+                )}
+                <Text style={[styles.text, variantStyle.text, textStyle, style.text]}>{title}</Text>
+            </View>
         </TouchableHighlight>
     );
 };
@@ -50,28 +66,37 @@ const getSize = (size) => {
 
     const sizes = {
         mini: {
-            buttonStyle: { paddingVertical: 12, paddingHorizontal: 8, borderRadius: 8 },
+            buttonStyle: { paddingVertical: 8, paddingHorizontal: 8, borderRadius: 8, gap: 4 },
             textStyle: { fontSize: 12, fontWeight: 600 },
+            iconStyle: { width: 14, height: 14 }
+
         },
         small: {
-            buttonStyle: { paddingVertical: 12, paddingHorizontal: 24, borderRadius: 8 },
+            buttonStyle: { paddingVertical: 8, paddingHorizontal: 16, borderRadius: 8, gap: 4 },
             textStyle: { fontSize: 14, fontWeight: 600 },
+            iconStyle: { width: 18, height: 18 }
+
         },
         medium: {
-            buttonStyle: { paddingVertical: 16, paddingHorizontal: 12, borderRadius: 8 },
+            buttonStyle: { paddingVertical: 12, paddingHorizontal: 12, borderRadius: 8, gap: 8 },
             textStyle: { fontSize: 16, fontWeight: 600 },
+            iconStyle: { width: 18, height: 18 }
+
         },
         large: {
-            buttonStyle: { height: 70, paddingVertical: 22, paddingHorizontal: 48, borderRadius: 32 },
+            buttonStyle: { height: 70, paddingVertical: 22, paddingHorizontal: 48, borderRadius: 32, gap: 12 },
             textStyle: { fontSize: 18, fontWeight: 600 },
+            iconStyle: { width: 32, height: 32 }
+
         },
     };
 
-    const { buttonStyle, textStyle } = sizes[size] || sizes.medium;
+    const { buttonStyle, textStyle, iconStyle } = sizes[size] || sizes.medium;
 
     return {
         buttonStyle: { ...buttonStyle },
         textStyle: { ...textStyle, fontWeight: '500' },
+        iconStyle
     };
 };
 
@@ -81,29 +106,41 @@ const getVariant = variant => {
         contained: {
             button: { backgroundColor: colors.primary, borderColor: colors.primary },
             text: { color: colors.white },
-            underlayColor: colors.primaryDark
+            underlayColor: colors.primaryDark,
+            icon: {
+                color: colors.white,
+            }
         },
         outlined: {
             button: { backgroundColor: colors.white, borderColor: colors.primary },
             text: { color: colors.primary },
-            underlayColor: colors.primaryLight
-
+            underlayColor: colors.primaryLight,
+            icon: {
+                color: colors.primary,
+            }
         },
         'outlined-dark': {
             button: { backgroundColor: colors.transparent, borderColor: colors.black },
             text: { color: colors.black },
-            underlayColor: colors.grayLight
-
+            underlayColor: colors.grayLight,
+            icon: {
+                color: colors.black,
+            }
         },
         text: {
             button: { backgroundColor: colors.transparent, borderColor: colors.transparent },
             text: { color: colors.primary },
-            underlayColor: colors.gray
-
+            underlayColor: colors.gray,
+            icon: {
+                color: colors.primary,
+            }
         },
         disabled: {
             button: { backgroundColor: colors.grayLight, borderColor: colors.grayLight },
             text: { color: colors.gray },
+            icon: {
+                color: colors.grayLight,
+            }
         },
     }
 
@@ -114,12 +151,18 @@ const getVariant = variant => {
 const styles = StyleSheet.create({
     button: {
         alignItems: 'center',
-        justifyContent: 'center',
+        // justifyContent: 'center',
         marginVertical: 5,
         borderWidth: 1,
-        minWidth: 90
+        minWidth: 64,
+        flexDirection: 'row',
     },
     text: {
         fontWeight: '500',
     },
+    startIconContainer: {
+        // backgroundColor: colors.black,
+        justifyContent: 'center',
+        alignItems: 'center',
+    }
 });
