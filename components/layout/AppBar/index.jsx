@@ -1,37 +1,34 @@
-import React from 'react';
-import {StyleSheet, TouchableHighlight, View} from 'react-native';
-import LeftArrowSvg from '../../../assets/icons/LeftArrowSvg';
-import colors from '../../../utils/colors';
-import Typography from '../../typography/Typography';
-
-const AppBar = ({title, isBottomSheet = false, onNavigate = () => {}}) => {
+import React from 'react'
+import { StyleSheet, View } from 'react-native'
+import LeftArrowSvg from '../../../assets/icons/LeftArrowSvg'
+import colors from '../../../utils/colors'
+import Typography from '../../typography/Typography'
+import {
+  useNavigation,
+} from '@react-navigation/native';
+import { TouchableHighlight } from 'react-native-gesture-handler'
+const AppBar = ({ title, isBottomSheet = false, onPress = () => { } }) => {
+  const navigation = useNavigation()
   return (
-    <View
-      style={[
-        styles.header,
-        {
-          flexDirection: isBottomSheet ? 'row-reverse' : 'row',
-        },
-      ]}>
+    <View style={[styles.header, {
+      flexDirection: isBottomSheet ? 'row-reverse' : 'row'
+    }]}>
       <TouchableHighlight
+        onPress={() => isBottomSheet ? onPress() : navigation.goBack()}
         underlayColor={colors.underlayColor}
-        onPress={() => {
-          onNavigate();
-        }}
-        style={[
-          styles.backButton,
-          {
-            transform: [{rotate: '-90deg'}],
-          },
-        ]}>
+        style={[styles.backButton, {
+          transform: [{ rotate: isBottomSheet ? '-90deg' : "0deg" }]
+        }]}>
         <LeftArrowSvg />
       </TouchableHighlight>
-      <Typography color={colors.grayDark} style={{flex: 1}} variant="base">
+      {title && <Typography variant='h1' fontSize={18} fontWeight={600} style={{
+        flex: 1
+      }} >
         {title}
-      </Typography>
+      </Typography>}
     </View>
-  );
-};
+  )
+}
 
 export default AppBar;
 
