@@ -135,7 +135,7 @@ const ChooseLocationScreen = () => {
         <View style={styles.gpsContainer}>
           <MapPinSvg style={styles.mapPin} />
           <View style={styles.gpsTextContainer}>
-            {!loading || isGpsEnabled === null ? (
+            {loading || isGpsEnabled === null ? (
               <ActivityIndicator size="small" color={colors.primary} />
             ) : isGpsEnabled ? (
               <>
@@ -218,13 +218,11 @@ const ChooseLocationScreen = () => {
 
 const styles = StyleSheet.create({
   layout: {
-    padding: 20,
-    // paddingTop: 55,
+    gap: 32
   },
   content: {
-    marginTop: 20,
     flex: 1,
-    gap: 18,
+    gap: 16,
   },
   textField: {
     borderColor: colors.grayDark,
@@ -260,7 +258,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   recentLocationsTitle: {
-    paddingTop: 10,
+    // paddingTop: 10,
   },
   truncatedAddress: {
     justifyContent: 'center',
