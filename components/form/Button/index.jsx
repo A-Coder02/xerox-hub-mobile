@@ -24,7 +24,6 @@ const Button = ({
 }) => {
     const { buttonStyle, textStyle, iconStyle } = getSize(size, color, disabled);
     const variantStyle = getVariant(disabled ? "disabled" : variant)
-    console.log({ iconStyle })
     return (
         <TouchableHighlight
             underlayColor={variantStyle.underlayColor}
@@ -159,6 +158,8 @@ const styles = StyleSheet.create({
     },
     text: {
         fontWeight: '500',
+        flex: 1,
+        textAlign: 'center'
     },
     startIconContainer: {
         // backgroundColor: colors.black,

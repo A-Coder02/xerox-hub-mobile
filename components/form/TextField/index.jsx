@@ -13,7 +13,8 @@ const TextField = forwardRef(
       prefix, // New prop for text prefix
       style,
       placeholderTextColor,
-      autoFocus
+      autoFocus,
+      onBlur, // Support onBlur for Formik
     },
     ref
   ) => {
@@ -26,11 +27,7 @@ const TextField = forwardRef(
           </View>
         )}
         {/* Render Prefix */}
-        {prefix && (
-          <Text style={styles.prefixText}>
-            {prefix}
-          </Text>
-        )}
+        {prefix && <Text style={styles.prefixText}>{prefix}</Text>}
         {/* Text Input */}
         <TextInput
           ref={ref}
@@ -40,6 +37,7 @@ const TextField = forwardRef(
           onChangeText={onChange}
           placeholderTextColor={placeholderTextColor || colors.placeholder}
           autoFocus={autoFocus}
+          onBlur={onBlur} // Handle Formik's onBlur
         />
         {/* Render EndIcon */}
         {EndIcon && (
@@ -60,7 +58,7 @@ const styles = StyleSheet.create({
     borderColor: colors.gray,
     borderRadius: 8,
     overflow: 'hidden',
-    alignItems: 'center', // Ensure proper alignment
+    alignItems: 'center',
   },
   startIconContainer: {
     backgroundColor: colors.whiteLight,
@@ -85,17 +83,15 @@ const styles = StyleSheet.create({
     backgroundColor: colors.whiteLight,
     color: colors.grayDark,
     fontSize: 16,
-    width: 32,
     padding: 8,
     paddingRight: 0,
-
   },
   input: {
     flex: 1,
     paddingVertical: 10,
     paddingHorizontal: 8,
     color: colors.black,
-    backgroundColor: colors.whiteLight
+    backgroundColor: colors.whiteLight,
   },
 });
 

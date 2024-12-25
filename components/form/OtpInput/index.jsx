@@ -8,7 +8,6 @@ const OtpInput = ({ length = 4, onChange, style, inputStyle }) => {
   const inputs = useRef([]);
 
   const handleInputChange = (text, index) => {
-    console.log({ text })
     const newOtp = [...otp];
     newOtp[index] = text;
     setOtp(newOtp);

@@ -41,9 +41,9 @@ const ButtonScreen = () => {
 
   const drawerRef = useRef();
 
-  useEffect(() => {
-    console.log({ drawerRef })
-  }, [])
+  // useEffect(() => {
+  //   console.log({ drawerRef })
+  // }, [])
 
   return (
     <Layout style={{ flex: 1 }}>
