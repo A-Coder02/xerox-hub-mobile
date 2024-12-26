@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import { TextInput, View, StyleSheet, Text } from 'react-native';
+import { TextInput, View, StyleSheet } from 'react-native';
 import colors from '../../../utils/colors';
 
 const TextField = forwardRef(
@@ -40,6 +40,7 @@ const TextField = forwardRef(
           onChangeText={onChange}
           placeholderTextColor={placeholderTextColor || colors.placeholder}
           autoFocus={autoFocus}
+          onBlur={onBlur} // Handle Formik's onBlur
         />
         {/* Render EndIcon */}
         {EndIcon && (
@@ -55,20 +56,21 @@ const TextField = forwardRef(
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    backgroundColor: colors.white,
+    backgroundColor: colors.whiteLight,
     borderWidth: 1,
     borderColor: colors.gray,
     borderRadius: 8,
     overflow: 'hidden',
-    alignItems: 'center', // Ensure proper alignment
   },
   startIconContainer: {
+    backgroundColor: colors.whiteLight,
     padding: 8,
     paddingRight: 0,
     justifyContent: 'center',
     alignItems: 'center',
   },
   endIconContainer: {
+    backgroundColor: colors.whiteLight,
     padding: 8,
     paddingLeft: 0,
     justifyContent: 'center',
@@ -76,8 +78,15 @@ const styles = StyleSheet.create({
   },
   iconStyle: {
     color: colors.grayDark,
-    width: 32,
-    height: 32,
+    width: 24,
+    height: 24,
+  },
+  prefixText: {
+    backgroundColor: colors.whiteLight,
+    color: colors.grayDark,
+    fontSize: 16,
+    padding: 8,
+    paddingRight: 0,
   },
   prefixText: {
     color: colors.grayDark,
@@ -89,6 +98,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 8,
     color: colors.black,
+    backgroundColor: colors.whiteLight,
   },
 });
 

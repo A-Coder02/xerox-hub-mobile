@@ -9,6 +9,7 @@ import NoInternetScreen from './screens/NoInternet';
 import Layout from './components/layout/Layout';
 import TypographyScreen from './screens/components/TypographyScreen';
 import ButtonScreen from './screens/components/ButtonScreen';
+import FormikFormScreen from './screens/components/FormikFormScreen';
 import CreateAccount from './screens/auth/CreateAccount';
 import PreLogin from './screens/auth/PreLogin';
 const Stack = createNativeStackNavigator();
@@ -50,7 +51,7 @@ export default function AppNavigations() {
     return () => {
       clearTimeout(timer);
     }
-  }, [])
+  }, []);
 
   if (isLoading) {
     return <SplashScreen />
@@ -79,6 +80,8 @@ export default function AppNavigations() {
       <Stack.Screen name="NoInternet" component={NoInternetScreen} />
       <Stack.Screen name="Typography" component={TypographyScreen} />
       <Stack.Screen name="Button" component={ButtonScreen} />
+      <Stack.Screen name="FormikForm" component={FormikFormScreen} />
+
     </Stack.Navigator>
 
 
