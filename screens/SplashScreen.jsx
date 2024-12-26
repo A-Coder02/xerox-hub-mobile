@@ -25,7 +25,7 @@ const SplashScreen = () => {
         </Typography>
       </View>
       <Image source={(MakeInIndiaPng)} style={{
-        width: 112,
+        width: 64,
         objectFit: 'contain'
       }} />
     </Layout>

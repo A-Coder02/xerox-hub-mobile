@@ -1,9 +1,9 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Typography from '../../components/typography/Typography';
 import Layout from '../../components/layout/Layout';
 import BrandSvg from '../../assets/icons/BrandSvg';
 import colors from '../../utils/colors';
-import {Pressable, StyleSheet, View} from 'react-native';
+import { Pressable, StyleSheet, View } from 'react-native';
 import Button from '../../components/form/Button';
 import BottomDrawer from '../../components/layout/BottomDrawer';
 import CreateAccount from './CreateAccount';
@@ -14,21 +14,21 @@ const PreLogin = () => {
   const [activeComponent, setActiveComponent] = useState(null); // State to track the active component
 
   useEffect(() => {
-    console.log({drawerRef});
+    console.log({ drawerRef });
   }, []);
 
   const openDrawer = component => {
     setActiveComponent(component); // Set the active component ('login' or 'createAccount')
-    drawerRef.current?.snapToIndex(1); // Open drawer to Index 1
+    drawerRef.current?.snapToIndex(0); // Open drawer to Index 0
   };
 
-  const {container, buttonContainer, textAlignment, googleButton} = styles;
+  const { container, buttonContainer, textAlignment, googleButton } = styles;
 
   return (
     <Layout>
       <View style={container}>
         <View>
-          <BrandSvg style={{left: -16}} height={65} color={colors.black} />
+          <BrandSvg style={{ left: -16 }} height={65} color={colors.black} />
           <Typography fontSize={64} fontWeight={400} color="black">
             Xerox for{' '}
           </Typography>
@@ -36,7 +36,7 @@ const PreLogin = () => {
             fontSize={64}
             fontWeight={400}
             color="primary"
-            style={{top: -40}}>
+            style={{ top: -40 }}>
             Everyone
           </Typography>
         </View>
@@ -50,12 +50,12 @@ const PreLogin = () => {
                 button: {
                   borderColor: colors.gray,
                 },
-                text: {color: colors.primary},
+                text: { color: colors.primary },
               }}
             />
           </View>
           <Typography
-            style={{textAlign: 'center'}}
+            style={{ textAlign: 'center' }}
             fontSize={17}
             fontWeight={400}>
             OR
@@ -68,7 +68,7 @@ const PreLogin = () => {
           />
           <Pressable
             onPress={() => openDrawer('createAccount')} // Pass 'createAccount' to open the CreateAccount component
-            style={({pressed}) => [
+            style={({ pressed }) => [
               {
                 flexDirection: 'row',
                 alignItems: 'center',
@@ -82,7 +82,7 @@ const PreLogin = () => {
             <Typography
               variant="base"
               color="primary"
-              style={{textDecorationLine: 'underline', top: 4}}>
+              style={{ textDecorationLine: 'underline', top: 4 }}>
               Create Account
             </Typography>
           </Pressable>
@@ -92,14 +92,14 @@ const PreLogin = () => {
       <BottomDrawer ref={drawerRef}>
         {activeComponent === 'login' && (
           <Login
-            onNavigate={() => {
+            onPress={() => {
               drawerRef.current?.close();
             }}
           />
         )}
         {activeComponent === 'createAccount' && (
           <CreateAccount
-            onNavigate={() => {
+            onPress={() => {
               drawerRef.current?.close();
             }}
           />
@@ -110,7 +110,7 @@ const PreLogin = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {flex: 1, marginBottom: 32, justifyContent: 'space-between'},
+  container: { flex: 1, marginBottom: 32, justifyContent: 'space-between' },
   buttonContainer: {
     alignItems: 'center',
     gap: 12,
