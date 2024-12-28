@@ -1,7 +1,7 @@
 import React, { forwardRef, useCallback, useImperativeHandle, useRef, useState } from 'react';
 import { StyleSheet } from 'react-native';
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
-import Typography from '../../typography/Typography';
+import { Keyboard } from 'react-native';
 const BottomDrawer = forwardRef((props, ref) => {
     const bottomSheetRef = useRef(null);
     const [isOpen, setIsOpen] = useState(false)
@@ -9,9 +9,12 @@ const BottomDrawer = forwardRef((props, ref) => {
     // Memoized callbacks for internal use
     const handleSheetChanges = useCallback((index) => {
         if (index !== -1) {
-            setIsOpen(true)
+            setIsOpen(true);
+
         }
         else {
+            Keyboard.dismiss();
+
             setIsOpen(false)
         }
     }, []);

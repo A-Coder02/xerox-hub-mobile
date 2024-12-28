@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Typography from '../../components/typography/Typography';
 import AppBar from '../../components/layout/AppBar';
@@ -8,18 +8,17 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import FormikTextField from '../../components/form/TextField/FormikTextField';
 import OtpInputField from '../../components/form/OtpInput/OtpInputField';
+import ResendOTP from '../../components/form/OtpInput/ResendOTP';
 
-// Validation schema
-const validationSchema = Yup.object().shape({
-  mobile_number: Yup.string()
-    .matches(/^[0-9]{10}$/, "Enter a valid 10-digit mobile number")
-    .required("Mobile number is required"),
-});
+
 
 const VerifyOtp = ({ onPress }) => {
 
+  const [otp, setOtp] = useState('');
+  console.log({ otp })
+
   const email = 'arbaj897ansari@gmail.com'
-  const getEncEmail = email.split('@').map((val, index) => {
+  const encryptedEmail = email.split('@').map((val, index) => {
     if (index === 0) {
       return val.slice(0, 4) + '*****'
     }
@@ -28,8 +27,9 @@ const VerifyOtp = ({ onPress }) => {
     }
   })
 
-  const onSubmit = (values) => {
-    console.log("Form Values:", values);
+  const onSubmit = () => {
+    if (otp.length === 4)
+      onPress();
   };
 
   const { container, formContainer, textFieldContainer } = styles;
@@ -51,21 +51,35 @@ const VerifyOtp = ({ onPress }) => {
             variant="caption"
             color="grayDark"
           >
-            Sent OTP to {getEncEmail}
+            Sent OTP to {encryptedEmail}
           </Typography>
         </View>
         <View style={textFieldContainer}>
           {/* Input for Mobile Number */}
           <OtpInputField
-
+            value={otp}
+            onChange={setOtp}
           />
-
+          {1 ?
+            <ResendOTP /> :
+            <Typography
+              style={{ paddingBottom: 0, marginBottom: 32, textAlign: 'center' }}
+              variant="caption"
+              color="grayDark"
+            >
+              Resend OTP after :{' '}
+              <Typography variant='caption' color='primary' >
+                02:00
+              </Typography>
+            </Typography>}
         </View>
       </View>
       <View>
         {/* Button to trigger login */}
         <Button
-          title="Login" size="large" />
+          onPress={onSubmit}
+          disabled={otp.length !== 4}
+          title="Verify OTP" size="large" />
       </View>
     </View>
   );

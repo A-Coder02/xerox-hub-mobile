@@ -57,7 +57,7 @@ const PreLogin = () => {
                 button: {
                   borderColor: colors.gray,
                 },
-                text: { color: colors.primary },
+                text: { color: colors.primary, flex: 0 },
               }}
             />
           </View>
@@ -71,6 +71,9 @@ const PreLogin = () => {
             title="Login with Phone Number"
             size="large"
             variant="outlined-dark"
+            style={{
+              text: { flex: 0 }
+            }}
             onPress={() => openDrawer('login')} // Pass 'login' to open the Login component
           />
           <Pressable
@@ -115,7 +118,7 @@ const PreLogin = () => {
             />
           ) : null}
       </BottomDrawer>
-      <BottomDrawer ref={otpDrawerRef}>
+      <BottomDrawer ref={otpDrawerRef}   >
         <VerifyOtp
           onPress={() => {
             otpDrawerRef.current?.close();
