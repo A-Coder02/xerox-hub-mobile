@@ -15,13 +15,15 @@ const validationSchema = Yup.object().shape({
     .required("Mobile number is required"),
 });
 
-const Login = ({ onPress }) => {
+const Login = ({ onPress, openOtpDrawer }) => {
   const initialValues = {
     mobile_number: "",
   };
 
   const onSubmit = (values) => {
     console.log("Form Values:", values);
+    onPress()
+    openOtpDrawer()
   };
 
   const { container, formContainer, textFieldContainer } = styles;
@@ -39,7 +41,7 @@ const Login = ({ onPress }) => {
               <AppBar
                 title="Login"
                 isBottomSheet
-                onPress={onPress}
+                onPress={() => onPress()}
                 textColor={colors.primary}
                 textVariant="h2"
               />

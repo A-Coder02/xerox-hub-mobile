@@ -17,7 +17,7 @@ const validationSchema = Yup.object().shape({
     .required("Mobile number is required"),
 });
 
-const Login = ({ onPress }) => {
+const CreateAccount = ({ onPress, openOtpDrawer }) => {
   const initialValues = {
     mobile_number: "",
     email: '',
@@ -38,6 +38,8 @@ const Login = ({ onPress }) => {
 
   const onSubmit = (values) => {
     console.log("Form Values:", values);
+    openOtpDrawer();
+    onPress();
   };
 
   const { container, formContainer, textFieldContainer } = styles;
@@ -110,4 +112,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Login;
+export default CreateAccount;

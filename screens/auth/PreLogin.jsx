@@ -8,9 +8,11 @@ import Button from '../../components/form/Button';
 import BottomDrawer from '../../components/layout/BottomDrawer';
 import CreateAccount from './CreateAccount';
 import Login from './Login';
+import VerifyOtp from './VerifyOtp';
 
 const PreLogin = () => {
   const drawerRef = useRef();
+  const otpDrawerRef = useRef();
   const [activeComponent, setActiveComponent] = useState(null); // State to track the active component
 
   useEffect(() => {
@@ -21,6 +23,11 @@ const PreLogin = () => {
     setActiveComponent(component); // Set the active component ('login' or 'createAccount')
     drawerRef.current?.snapToIndex(2); // Open drawer to Index 0
   };
+
+  const openOtpDrawer = () => {
+    otpDrawerRef.current?.snapToIndex(2); // Open drawer to Index 0
+
+  }
 
   const { container, buttonContainer, textAlignment, googleButton } = styles;
 
@@ -96,6 +103,7 @@ const PreLogin = () => {
             onPress={() => {
               drawerRef.current?.close();
             }}
+            openOtpDrawer={openOtpDrawer}
           />
         ) :
           activeComponent === 'createAccount' ? (
@@ -103,8 +111,16 @@ const PreLogin = () => {
               onPress={() => {
                 drawerRef.current?.close();
               }}
+              openOtpDrawer={openOtpDrawer}
             />
           ) : null}
+      </BottomDrawer>
+      <BottomDrawer ref={otpDrawerRef}>
+        <VerifyOtp
+          onPress={() => {
+            otpDrawerRef.current?.close();
+          }}
+        />
       </BottomDrawer>
     </Layout>
   );
