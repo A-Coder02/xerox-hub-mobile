@@ -19,7 +19,7 @@ const PreLogin = () => {
 
   const openDrawer = component => {
     setActiveComponent(component); // Set the active component ('login' or 'createAccount')
-    drawerRef.current?.snapToIndex(0); // Open drawer to Index 0
+    drawerRef.current?.snapToIndex(2); // Open drawer to Index 0
   };
 
   const { container, buttonContainer, textAlignment, googleButton } = styles;
@@ -89,21 +89,22 @@ const PreLogin = () => {
         </View>
       </View>
 
+
       <BottomDrawer ref={drawerRef}>
-        {activeComponent === 'login' && (
+        {activeComponent === 'login' ? (
           <Login
             onPress={() => {
               drawerRef.current?.close();
             }}
           />
-        )}
-        {activeComponent === 'createAccount' && (
-          <CreateAccount
-            onPress={() => {
-              drawerRef.current?.close();
-            }}
-          />
-        )}
+        ) :
+          activeComponent === 'createAccount' ? (
+            <CreateAccount
+              onPress={() => {
+                drawerRef.current?.close();
+              }}
+            />
+          ) : null}
       </BottomDrawer>
     </Layout>
   );
