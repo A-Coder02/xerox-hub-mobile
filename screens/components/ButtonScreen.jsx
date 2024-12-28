@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { View, ScrollView, StyleSheet, Image } from 'react-native';
 import Typography from '../../components/typography/Typography';
 import Button from '../../components/form/Button';
@@ -40,7 +40,8 @@ const SvgComponent = (props) => (
 const ButtonScreen = () => {
 
   const drawerRef = useRef();
-
+  const [otp, setOtp] = useState('')
+  console.log({ otp })
   // useEffect(() => {
   //   console.log({ drawerRef })
   // }, [])
@@ -52,7 +53,10 @@ const ButtonScreen = () => {
         <SvgComponent width={32} height={32} />
         <Typography>Button Examples</Typography>
         <TextField startIcon={PrintSvg} endIcon={PrintSvg} />
-        <OtpInputField />
+        <OtpInputField
+          value={otp}
+          onChange={setOtp}
+          autoFocus />
         <View style={{ gap: 8, alignItems: 'center' }} >
           <Typography>Sizes</Typography>
           <Button
