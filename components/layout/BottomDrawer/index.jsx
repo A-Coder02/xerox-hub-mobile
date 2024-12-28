@@ -8,7 +8,6 @@ const BottomDrawer = forwardRef((props, ref) => {
 
     // Memoized callbacks for internal use
     const handleSheetChanges = useCallback((index) => {
-        console.log('Sheet changed to index:', index);
         if (index !== -1) {
             setIsOpen(true)
         }

@@ -12,6 +12,7 @@ import ButtonScreen from './screens/components/ButtonScreen';
 import CreateAccount from './screens/auth/CreateAccount';
 import PreLogin from './screens/auth/PreLogin';
 import ChooseLocationScreen from './screens/locations/ChooseLocationScreen';
+import FormikFormScreen from './screens/components/FormikFormScreen';
 const Stack = createNativeStackNavigator();
 
 const getIsSignedIn = () => {
@@ -81,6 +82,7 @@ export default function AppNavigations() {
       <Stack.Screen name="NoInternet" component={NoInternetScreen} />
       <Stack.Screen name="Typography" component={TypographyScreen} />
       <Stack.Screen name="Button" component={ButtonScreen} />
+      <Stack.Screen name="FormikForm" component={FormikFormScreen} />
 
     </Stack.Navigator>
 

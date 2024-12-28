@@ -20,7 +20,6 @@ const SvgComponent = (props) => (
     fill="none"
     {...props}
   >
-    {console.log({ props })}
     <Path
       stroke="#fff"
       strokeLinecap="round"
@@ -42,9 +41,9 @@ const ButtonScreen = () => {
 
   const drawerRef = useRef();
 
-  useEffect(() => {
-    console.log({ drawerRef })
-  }, [])
+  // useEffect(() => {
+  //   console.log({ drawerRef })
+  // }, [])
 
   return (
     <Layout style={{ flex: 1 }}>
@@ -54,18 +53,28 @@ const ButtonScreen = () => {
         <Typography>Button Examples</Typography>
         <TextField startIcon={PrintSvg} endIcon={PrintSvg} />
         <OtpInputField />
-        <View style={{ gap: 8 }} >
+        <View style={{ gap: 8, alignItems: 'center' }} >
           <Typography>Sizes</Typography>
-          <Button title='Default (Medium)' onPress={() => {
-            // drawerRef.current.open()
-            drawerRef.current.snapToIndex(0)
-            // drawerRef.current.snapToIndex(1)
-            // drawerRef.current.close()
-          }} />
-          <Button title='Medium' size='medium' />
-          <Button title='Large' size='large' />
-          <Button title='small' size='small' />
-          <Button title='mini' size='mini' />
+          <Button
+            startIcon={PrintSvg}
+            title='Default (Medium)' onPress={() => {
+              // drawerRef.current.open()
+              drawerRef.current.snapToIndex(0)
+              // drawerRef.current.snapToIndex(1)
+              // drawerRef.current.close()
+            }} />
+          <Button
+            // startIcon={PrintSvg}
+            title='Medium' size='medium' />
+          <Button
+            startIcon={PrintSvg}
+            title='Google' size='large' />
+          <Button
+            startIcon={PrintSvg}
+            title='small' size='small' />
+          <Button
+            startIcon={PrintSvg}
+            title='mini' size='mini' />
           <View style={{ flexDirection: 'row', gap: 12, backgroundColor: colors.grayLight }} >
             <IconButton icon={PrintSvg} size='medium' variant='outlined' />
             <IconButton icon={PrintSvgIcon} size='large' />

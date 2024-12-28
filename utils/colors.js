@@ -9,5 +9,6 @@ export default colors = {
     grayLight: "#F5F2FB",
     grayDark: "#8C8994",
     transparent: "#FF000000",
-    placeholder: '#A7BAC8'
+    placeholder: '#A7BAC8',
+    red: '#FF4040'
 }
