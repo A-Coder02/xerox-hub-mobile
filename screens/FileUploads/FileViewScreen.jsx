@@ -1,39 +1,38 @@
-import React from 'react';
-import { StyleSheet, View, Text, Image, TextInput, Linking } from 'react-native';
-import { useRoute } from '@react-navigation/native'; // To get the file passed from navigation
+import React, { useEffect, useState } from 'react';
+import { View, Image, StyleSheet, Alert } from 'react-native';  // No need to import Text
+import Typography from '../../components/typography/Typography';  // Import Typography
+import { useRoute } from '@react-navigation/native';
+import PdfSvgIcon from '../../assets/icons/PdfSvgIcon';
 
 const FileViewScreen = () => {
   const route = useRoute();
-  const { file } = route.params; // Get the file data from params
+  const { file } = route.params; // Get the passed file data
+  const [imageUri, setImageUri] = useState(null);
 
-  if (!file) {
-    return (
-      <View style={styles.container}>
-        <Text>No file to view.</Text>
-      </View>
-    );
-  }
+  useEffect(() => {
+    if (file) {
+      // Check if the file is an image, and set the URI
+      if (file.type?.includes('image')) {
+        setImageUri(file.uri); // Set URI if the file is an image
+      } else {
+        setImageUri(null); // Reset image URI if the file is not an image
+      }
+    } else {
+      Alert.alert('Error', 'No file data found.');
+    }
+  }, [file]);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{file.name}</Text>
-      {file.type?.includes('pdf') ? (
-        <Text>PDF File (Implement PDF viewer if required)</Text>
-      ) : file.type?.includes('image') ? (
-        <Image source={{ uri: file.uri }} style={styles.image} />
+      {imageUri ? (
+        <Image source={{ uri: imageUri }} style={styles.image} />
       ) : (
-        <Text>Unsupported file type</Text>
+        <View style={styles.fileDetails}>
+          <PdfSvgIcon width={48} height={48} />
+          {/* <Typography>{file.name}</Typography> Use Typography here */}
+          {/* <Typography>File type: {file.type}</Typography> Use Typography here */}
+        </View>
       )}
-      <Text>Size: {file.size} bytes</Text>
-      <Text>Date: {file.date}</Text>
-      <TextInput
-        editable={false}
-        value={file.uri}
-        style={styles.uriInput}
-      />
-      <Text onPress={() => Linking.openURL(file.uri)} style={styles.link}>
-        Open File
-      </Text>
     </View>
   );
 };
@@ -41,27 +40,18 @@ const FileViewScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
     padding: 20,
   },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 16,
-  },
   image: {
-    width: 300,
+    width: '100%',
     height: 300,
-    marginBottom: 16,
+    resizeMode: 'contain', // Ensures the image fits without distortion
   },
-  uriInput: {
-    borderColor: '#ccc',
-    borderWidth: 1,
-    padding: 8,
-    marginBottom: 16,
-  },
-  link: {
-    color: 'blue',
-    textDecorationLine: 'underline',
+  fileDetails: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 
