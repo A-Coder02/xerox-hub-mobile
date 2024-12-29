@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {Text, View} from 'react-native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import SplashScreen from './screens/SplashScreen';
-import { createNavigationContainerRef } from '@react-navigation/native';
-import { useNetInfo } from '@react-native-community/netinfo';
-import { useNavigation } from '@react-navigation/native';
+import {createNavigationContainerRef} from '@react-navigation/native';
+import {useNetInfo} from '@react-native-community/netinfo';
+import {useNavigation} from '@react-navigation/native';
 import NoInternetScreen from './screens/NoInternet';
 import Layout from './components/layout/Layout';
 import TypographyScreen from './screens/components/TypographyScreen';
@@ -13,12 +13,13 @@ import CreateAccount from './screens/auth/CreateAccount';
 import PreLogin from './screens/auth/PreLogin';
 import MyFilesScreen from './screens/FileUploads/MyFilesScreen';
 import FileViewScreen from './screens/FileUploads/FileViewScreen';
+import Avatar from './screens/avatar/Avatar';
 
 const Stack = createNativeStackNavigator();
 
 const getIsSignedIn = () => {
   // custom logic to check if the user is signed in
-  return true;  // Assuming signed in for this example
+  return true; // Assuming signed in for this example
 };
 
 export const navigationRef = createNavigationContainerRef();
@@ -37,15 +38,15 @@ export default function AppNavigations() {
 
   React.useEffect(() => {
     if (!netInfo.isConnected && navigation.isReady()) {
-      navigation.navigate('NoInternet');  // Redirect to No Internet Screen
+      navigation.navigate('NoInternet'); // Redirect to No Internet Screen
     } else {
-      if (navigation.canGoBack()) navigation.goBack();  // Go back when connection restores
+      if (navigation.canGoBack()) navigation.goBack(); // Go back when connection restores
     }
   }, [netInfo, navigation]);
 
   React.useEffect(() => {
     const timer = setTimeout(() => {
-      setIsLoading(false);  // Remove splash screen after loading
+      setIsLoading(false); // Remove splash screen after loading
     }, 2000);
     return () => clearTimeout(timer);
   }, []);
@@ -55,10 +56,12 @@ export default function AppNavigations() {
   }
 
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="MyFile">
+    <Stack.Navigator
+      screenOptions={{headerShown: false}}
+      initialRouteName="Avatar">
       <Stack.Screen name="PreLogin" component={PreLogin} />
       <Stack.Screen name="CreateAccount" component={CreateAccount} />
-      
+
       {isSignedIn ? (
         <>
           <Stack.Screen name="Home" component={HomeScreen} />
@@ -66,7 +69,7 @@ export default function AppNavigations() {
           <Stack.Screen name="Settings" component={SettingsScreen} />
           <Stack.Screen name="MyFile" component={MyFilesScreen} />
           <Stack.Screen name="FileViewScreen" component={FileViewScreen} />
-
+          <Stack.Screen name="Avatar" component={Avatar} />
         </>
       ) : (
         <>
@@ -74,7 +77,7 @@ export default function AppNavigations() {
           <Stack.Screen name="SignUp" component={SignUpScreen} />
         </>
       )}
-      
+
       <Stack.Screen name="NoInternet" component={NoInternetScreen} />
       <Stack.Screen name="Typography" component={TypographyScreen} />
       <Stack.Screen name="Button" component={ButtonScreen} />
@@ -83,7 +86,11 @@ export default function AppNavigations() {
 }
 
 function HomeScreen() {
-  return <Layout><Text>Home Screen</Text></Layout>;
+  return (
+    <Layout>
+      <Text>Home Screen</Text>
+    </Layout>
+  );
 }
 
 function ProfileScreen() {
