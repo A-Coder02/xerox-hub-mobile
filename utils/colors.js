@@ -9,5 +9,13 @@ export default colors = {
     grayLight: "#F5F2FB",
     grayDark: "#8C8994",
     transparent: "#FF000000",
-    placeholder: '#A7BAC8'
+    placeholder: '#A7BAC8',
+
+    // Extras
+
+    pdfIcon:"#FF4040",
+    imageIcon:"#3ABC65",
+    arrowRightIcon:"#071731",
+    plusIcon:"#00C34B"
+
 }
