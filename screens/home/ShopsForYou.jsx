@@ -26,7 +26,7 @@ const ShopsForYou = ({onPress}) => {
          <Card
           imageSource={require('../../assets/images/shop-image.png')}
           title="Yellow Print Shop"
-          
+
         />
       </View>
     </Layout>
@@ -36,6 +36,7 @@ const ShopsForYou = ({onPress}) => {
 const styles = StyleSheet.create({
   layout: {
     gap: 32,
+    
   },
   content: {
     flex: 1,

@@ -39,13 +39,8 @@ const Card = ({
 const styles = StyleSheet.create({
   card: {
     flexDirection: 'column',
-    backgroundColor: colors.white,
+    backgroundColor: 'white',
     borderRadius: 8,
-    shadowColor: colors.black,
-    shadowOffset: {width: 0, height: 2},
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3, // Shadow for Android
     minWidth: 370,
   },
   image: {
