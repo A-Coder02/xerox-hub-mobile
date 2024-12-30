@@ -1,23 +1,18 @@
 import * as React from "react";
-import Svg, { G, Rect, Path } from "react-native-svg";
-import colors from "../../utils/colors";
-const PlusIcon = ({ size = 100, ...props }) => (
+import Svg, { Path } from "react-native-svg";
+const PlusIcon = (props) => (
   <Svg
-    width={size}
-    height={size}
-    viewBox="0 0 64 64"
+    width={props.width}
+    height={props.height}
+    viewBox="0 0 20 20"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
-    <G opacity={0.64}>
-      <Rect width={64} height={64} rx={32} fill={colors.plusIcon} />
-      <Path
-        d="M30.6667 33.3334H22.6667V30.6667H30.6667V22.6667H33.3334V30.6667H41.3334V33.3334H33.3334V41.3334H30.6667V33.3334Z"
-        fill="white"
-      />
-    </G>
+    <Path
+      d="M8.66675 11.3334H0.666748V8.66669H8.66675V0.666687H11.3334V8.66669H19.3334V11.3334H11.3334V19.3334H8.66675V11.3334Z"
+      fill={props.color}
+    />
   </Svg>
 );
-
 export default PlusIcon;
