@@ -12,6 +12,7 @@ import ButtonScreen from './screens/components/ButtonScreen';
 import CreateAccount from './screens/auth/CreateAccount';
 import PreLogin from './screens/auth/PreLogin';
 import ChooseLocationScreen from './screens/locations/ChooseLocationScreen';
+import ShopsForYou from './screens/home/ShopsForYou';
 const Stack = createNativeStackNavigator();
 
 const getIsSignedIn = () => {
@@ -61,7 +62,7 @@ export default function AppNavigations() {
     <Stack.Navigator screenOptions={{
       headerShown: false
     }}
-      initialRouteName='PreLogin'
+      initialRouteName='ShopsForYou'
     >
       <Stack.Screen name="PreLogin" component={PreLogin} />
       <Stack.Screen name="CreateAccount" component={CreateAccount} />
@@ -71,6 +72,7 @@ export default function AppNavigations() {
           <Stack.Screen name="Profile" component={ProfileScreen} />
           <Stack.Screen name="Settings" component={SettingsScreen} />
           <Stack.Screen name="ChooseLocation" component={ChooseLocationScreen} />
+          <Stack.Screen name="ShopsForYou" component={ShopsForYou} />
         </>
       ) : (
         <>

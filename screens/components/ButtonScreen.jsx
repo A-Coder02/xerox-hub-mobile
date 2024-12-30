@@ -14,6 +14,8 @@ import Svg, { Path } from "react-native-svg"
 import PrintSvg from '../../assets/icons/PrintSvg';
 import Layout from '../../components/layout/Layout';
 import AppBar from '../../components/layout/AppBar';
+import BookMarkSvg from '../../assets/icons/BookMarkSvg';
+import BookMarkFillSvg from '../../assets/icons/BookMarkFillSvg';
 const SvgComponent = (props) => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
@@ -69,6 +71,10 @@ const ButtonScreen = () => {
           <View style={{ flexDirection: 'row', gap: 12, backgroundColor: colors.grayLight }} >
             <IconButton icon={PrintSvg} size='medium' variant='outlined' />
             <IconButton icon={PrintSvgIcon} size='large' />
+            <IconButton icon={BookMarkSvg} size='medium' />
+            <IconButton icon={BookMarkFillSvg} size='medium' />
+
+            
             {/* <IconButton icon={Cube}  size='large' /> */}
             {/* <Image style={{width: 32, height : 32}} source={require('../../assets/icons/PrintSvgIcon.jsx')} /> */}
           </View>
