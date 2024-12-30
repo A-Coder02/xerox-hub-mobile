@@ -1,7 +1,7 @@
 import React, {useRef} from 'react';
 import Layout from '../../components/layout/Layout';
 import AppBar from '../../components/layout/AppBar';
-import {Image, StyleSheet, View} from 'react-native';
+import {Image, ScrollView, StyleSheet, View} from 'react-native';
 import TextField from '../../components/form/TextField';
 import SearchSvg from '../../assets/icons/SearchSvg';
 import Card from '../../components/Card';
@@ -19,15 +19,17 @@ const ShopsForYou = ({onPress}) => {
           startIcon={SearchSvg}
           placeholderTextColor={colors.grayDark}
         />
-        <Card
-          imageSource={require('../../assets/images/shop-image.png')}
-          title="Yellow Print Shop"
-        />
-         <Card
-          imageSource={require('../../assets/images/shop-image.png')}
-          title="Yellow Print Shop"
 
-        />
+        <ScrollView>
+          {new Array(10).fill(0).map(c => (
+            <Card
+              key={c}
+              imageSource={require('../../assets/images/shop-image.png')}
+              title={'Store Name'}
+              subtitle={'14.3KM'}
+            />
+          ))}
+        </ScrollView>
       </View>
     </Layout>
   );
@@ -36,7 +38,6 @@ const ShopsForYou = ({onPress}) => {
 const styles = StyleSheet.create({
   layout: {
     gap: 32,
-    
   },
   content: {
     flex: 1,
