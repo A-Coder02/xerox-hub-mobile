@@ -3,11 +3,15 @@ export default colors = {
     primaryLight: '#EBFFF2',
     primaryDark: '#3CAC62',
     black: '#242424',
-    whiteLight: "#fffff",
+    whiteLight: "#ffffff",
     white: "#FAFAFA",
     gray: "#D1CFD7",
     grayLight: "#F5F2FB",
     grayDark: "#8C8994",
     transparent: "#FF000000",
-    placeholder: '#A7BAC8'
+    placeholder: '#A7BAC8',
+
+    // Extras
+
+    red:"#FF4040",
 }

@@ -11,11 +11,14 @@ import TypographyScreen from './screens/components/TypographyScreen';
 import ButtonScreen from './screens/components/ButtonScreen';
 import CreateAccount from './screens/auth/CreateAccount';
 import PreLogin from './screens/auth/PreLogin';
+import MyFilesScreen from './screens/FileUploads/MyFilesScreen';
+import FileViewScreen from './screens/FileUploads/FileViewScreen';
+
 const Stack = createNativeStackNavigator();
 
 const getIsSignedIn = () => {
-  // custom logic
-  return true;
+  // custom logic to check if the user is signed in
+  return true;  // Assuming signed in for this example
 };
 
 export const navigationRef = createNavigationContainerRef();
@@ -30,46 +33,40 @@ export default function AppNavigations() {
   const [isLoading, setIsLoading] = React.useState(true);
   const isSignedIn = getIsSignedIn();
   const netInfo = useNetInfo();
-  const navigation = useNavigation()
-
+  const navigation = useNavigation();
 
   React.useEffect(() => {
     if (!netInfo.isConnected && navigation.isReady()) {
-      navigation?.navigate('NoInternet');
+      navigation.navigate('NoInternet');  // Redirect to No Internet Screen
+    } else {
+      if (navigation.canGoBack()) navigation.goBack();  // Go back when connection restores
     }
-    else {
-      if (navigation.canGoBack())
-        navigation.goBack();
-    }
-  }, [netInfo, navigation])
+  }, [netInfo, navigation]);
 
   React.useEffect(() => {
     const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000)
-    return () => {
-      clearTimeout(timer);
-    }
+      setIsLoading(false);  // Remove splash screen after loading
+    }, 2000);
+    return () => clearTimeout(timer);
   }, []);
 
   if (isLoading) {
-    return <SplashScreen />
+    return <SplashScreen />;
   }
 
   return (
-    <Stack.Navigator screenOptions={{
-      headerShown: false
-    }}
-      initialRouteName='PreLogin'
-    >
+    <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="MyFile">
       <Stack.Screen name="PreLogin" component={PreLogin} />
       <Stack.Screen name="CreateAccount" component={CreateAccount} />
+      
       {isSignedIn ? (
         <>
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Profile" component={ProfileScreen} />
           <Stack.Screen name="Settings" component={SettingsScreen} />
-          <Stack.Screen name="ChooseLocation" component={ChooseLocationScreen} />
+          <Stack.Screen name="MyFile" component={MyFilesScreen} />
+          <Stack.Screen name="FileViewScreen" component={FileViewScreen} />
+
         </>
       ) : (
         <>
@@ -77,21 +74,16 @@ export default function AppNavigations() {
           <Stack.Screen name="SignUp" component={SignUpScreen} />
         </>
       )}
+      
       <Stack.Screen name="NoInternet" component={NoInternetScreen} />
       <Stack.Screen name="Typography" component={TypographyScreen} />
       <Stack.Screen name="Button" component={ButtonScreen} />
-
     </Stack.Navigator>
-
-
   );
 }
 
 function HomeScreen() {
-
-  return <Layout>
-    <Text  >Home Screen</Text>
-  </Layout>
+  return <Layout><Text>Home Screen</Text></Layout>;
 }
 
 function ProfileScreen() {
@@ -109,4 +101,3 @@ function SignInScreen() {
 function SignUpScreen() {
   return <View />;
 }
-
