@@ -4,16 +4,17 @@ import colors from '../../../utils/colors';
 
 const TextField = forwardRef(
   (
-    { 
-      value, 
-      label, 
-      onChange, 
-      startIcon: StartIcon, 
-      endIcon: EndIcon, 
+    {
+      value,
+      label,
+      onChange,
+      startIcon: StartIcon,
+      endIcon: EndIcon,
       prefix, // New prop for text prefix
-      style, 
-      placeholderTextColor, 
-      autoFocus 
+      style,
+      placeholderTextColor,
+      autoFocus,
+      onBlur, // Support onBlur for Formik
     },
     ref
   ) => {
@@ -26,11 +27,7 @@ const TextField = forwardRef(
           </View>
         )}
         {/* Render Prefix */}
-        {prefix && (
-          <Text style={styles.prefixText}>
-            {prefix}
-          </Text>
-        )}
+        {prefix && <Text style={styles.prefixText}>{prefix}</Text>}
         {/* Text Input */}
         <TextInput
           ref={ref}
@@ -40,6 +37,7 @@ const TextField = forwardRef(
           onChangeText={onChange}
           placeholderTextColor={placeholderTextColor || colors.placeholder}
           autoFocus={autoFocus}
+          onBlur={onBlur} // Handle Formik's onBlur
         />
         {/* Render EndIcon */}
         {EndIcon && (
@@ -60,15 +58,17 @@ const styles = StyleSheet.create({
     borderColor: colors.gray,
     borderRadius: 8,
     overflow: 'hidden',
-    alignItems: 'center', // Ensure proper alignment
+    alignItems: 'center',
   },
   startIconContainer: {
+    backgroundColor: colors.whiteLight,
     padding: 8,
     paddingRight: 0,
     justifyContent: 'center',
     alignItems: 'center',
   },
   endIconContainer: {
+    backgroundColor: colors.whiteLight,
     padding: 8,
     paddingLeft: 0,
     justifyContent: 'center',
@@ -76,8 +76,15 @@ const styles = StyleSheet.create({
   },
   iconStyle: {
     color: colors.grayDark,
-    width: 32,
-    height: 32,
+    width: 24,
+    height: 24,
+  },
+  prefixText: {
+    backgroundColor: colors.whiteLight,
+    color: colors.grayDark,
+    fontSize: 16,
+    padding: 8,
+    paddingRight: 0,
   },
   prefixText: {
     color: colors.grayDark,
@@ -89,7 +96,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 8,
     color: colors.black,
-    backgroundColor: colors.white
+    backgroundColor: colors.whiteLight,
   },
 });
 

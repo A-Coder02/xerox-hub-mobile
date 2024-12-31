@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { View, ScrollView, StyleSheet, Image } from 'react-native';
 import Typography from '../../components/typography/Typography';
 import Button from '../../components/form/Button';
@@ -14,13 +14,14 @@ import Svg, { Path } from "react-native-svg"
 import PrintSvg from '../../assets/icons/PrintSvg';
 import Layout from '../../components/layout/Layout';
 import AppBar from '../../components/layout/AppBar';
+import BookMarkSvg from '../../assets/icons/BookMarkSvg';
+import BookMarkFillSvg from '../../assets/icons/BookMarkFillSvg';
 const SvgComponent = (props) => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     {...props}
   >
-    {console.log({ props })}
     <Path
       stroke="#fff"
       strokeLinecap="round"
@@ -41,10 +42,11 @@ const SvgComponent = (props) => (
 const ButtonScreen = () => {
 
   const drawerRef = useRef();
-
-  useEffect(() => {
-    console.log({ drawerRef })
-  }, [])
+  const [otp, setOtp] = useState('')
+  console.log({ otp })
+  // useEffect(() => {
+  //   console.log({ drawerRef })
+  // }, [])
 
   return (
     <Layout style={{ flex: 1 }}>
@@ -53,22 +55,39 @@ const ButtonScreen = () => {
         <SvgComponent width={32} height={32} />
         <Typography>Button Examples</Typography>
         <TextField startIcon={PrintSvg} endIcon={PrintSvg} />
-        <OtpInputField />
-        <View style={{ gap: 8 }} >
+        <OtpInputField
+          value={otp}
+          onChange={setOtp}
+          autoFocus />
+        <View style={{ gap: 8, alignItems: 'center' }} >
           <Typography>Sizes</Typography>
-          <Button title='Default (Medium)' onPress={() => {
-            // drawerRef.current.open()
-            drawerRef.current.snapToIndex(0)
-            // drawerRef.current.snapToIndex(1)
-            // drawerRef.current.close()
-          }} />
-          <Button title='Medium' size='medium' />
-          <Button title='Large' size='large' />
-          <Button title='small' size='small' />
-          <Button title='mini' size='mini' />
+          <Button
+            startIcon={PrintSvg}
+            title='Default (Medium)' onPress={() => {
+              // drawerRef.current.open()
+              drawerRef.current.snapToIndex(0)
+              // drawerRef.current.snapToIndex(1)
+              // drawerRef.current.close()
+            }} />
+          <Button
+            // startIcon={PrintSvg}
+            title='Medium' size='medium' />
+          <Button
+            startIcon={PrintSvg}
+            title='Google' size='large' />
+          <Button
+            startIcon={PrintSvg}
+            title='small' size='small' />
+          <Button
+            startIcon={PrintSvg}
+            title='mini' size='mini' />
           <View style={{ flexDirection: 'row', gap: 12, backgroundColor: colors.grayLight }} >
             <IconButton icon={PrintSvg} size='medium' variant='outlined' />
             <IconButton icon={PrintSvgIcon} size='large' />
+            <IconButton icon={BookMarkSvg} size='medium' />
+            <IconButton icon={BookMarkFillSvg} size='medium' />
+
+            
             {/* <IconButton icon={Cube}  size='large' /> */}
             {/* <Image style={{width: 32, height : 32}} source={require('../../assets/icons/PrintSvgIcon.jsx')} /> */}
           </View>
