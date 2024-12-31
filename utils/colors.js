@@ -14,6 +14,4 @@ export default colors = {
     // Extras
 
     red:"#FF4040",
-    plusIcon:"#00C34B"
-
 }

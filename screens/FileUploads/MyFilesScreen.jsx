@@ -118,7 +118,6 @@ const MyFilesScreen = () => {
   
       try {
         await AsyncStorage.setItem('fileUris', JSON.stringify(updatedFiles));
-        Alert.alert('File saved successfully!');
         setSelectedFile(null);
         setFileName(''); // Reset the input field
         drawerRef.current.close();
