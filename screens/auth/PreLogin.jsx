@@ -8,9 +8,11 @@ import Button from '../../components/form/Button';
 import BottomDrawer from '../../components/layout/BottomDrawer';
 import CreateAccount from './CreateAccount';
 import Login from './Login';
+import VerifyOtp from './VerifyOtp';
 
 const PreLogin = () => {
   const drawerRef = useRef();
+  const otpDrawerRef = useRef();
   const [activeComponent, setActiveComponent] = useState(null); // State to track the active component
 
   useEffect(() => {
@@ -19,10 +21,15 @@ const PreLogin = () => {
 
   const openDrawer = component => {
     setActiveComponent(component); // Set the active component ('login' or 'createAccount')
-    drawerRef.current?.snapToIndex(0); // Open drawer to Index 0
+    drawerRef.current?.snapToIndex(2); // Open drawer to Index 0
   };
 
-  const { container, buttonContainer, textAlignment, googleButton } = styles;
+  const openOtpDrawer = () => {
+    otpDrawerRef.current?.snapToIndex(2); // Open drawer to Index 0
+
+  }
+
+  const { container, buttonContainer, textAlignment } = styles;
 
   return (
     <Layout>
@@ -41,7 +48,7 @@ const PreLogin = () => {
           </Typography>
         </View>
         <View style={buttonContainer}>
-          <View style={googleButton}>
+          <View>
             <Button
               title="Login with Google"
               size="large"
@@ -50,7 +57,7 @@ const PreLogin = () => {
                 button: {
                   borderColor: colors.gray,
                 },
-                text: { color: colors.primary },
+                text: { color: colors.primary, flex: 0 },
               }}
             />
           </View>
@@ -64,6 +71,9 @@ const PreLogin = () => {
             title="Login with Phone Number"
             size="large"
             variant="outlined-dark"
+            style={{
+              text: { flex: 0 }
+            }}
             onPress={() => openDrawer('login')} // Pass 'login' to open the Login component
           />
           <Pressable
@@ -89,21 +99,31 @@ const PreLogin = () => {
         </View>
       </View>
 
+
       <BottomDrawer ref={drawerRef}>
-        {activeComponent === 'login' && (
+        {activeComponent === 'login' ? (
           <Login
             onPress={() => {
               drawerRef.current?.close();
             }}
+            openOtpDrawer={openOtpDrawer}
           />
-        )}
-        {activeComponent === 'createAccount' && (
-          <CreateAccount
-            onPress={() => {
-              drawerRef.current?.close();
-            }}
-          />
-        )}
+        ) :
+          activeComponent === 'createAccount' ? (
+            <CreateAccount
+              onPress={() => {
+                drawerRef.current?.close();
+              }}
+              openOtpDrawer={openOtpDrawer}
+            />
+          ) : null}
+      </BottomDrawer>
+      <BottomDrawer ref={otpDrawerRef}   >
+        <VerifyOtp
+          onPress={() => {
+            otpDrawerRef.current?.close();
+          }}
+        />
       </BottomDrawer>
     </Layout>
   );
