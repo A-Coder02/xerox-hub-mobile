@@ -6,12 +6,12 @@ import TextField from '../../components/form/TextField';
 import SearchSvg from '../../assets/icons/SearchSvg';
 import Card from '../../components/Card';
 
-const ShopsForYou = ({onPress}) => {
+const MyShops = ({onPress}) => {
   const ref = useRef();
   const {layout, content, image} = styles;
   return (
     <Layout style={layout}>
-      <AppBar title="Shops For You" onPress={onPress} textVariant="h3" />
+      <AppBar title="My Favourites" onPress={onPress} textVariant="h3" />
       <View style={content}>
         <TextField
           ref={ref}
@@ -21,7 +21,7 @@ const ShopsForYou = ({onPress}) => {
         />
 
         <ScrollView>
-          {new Array(10).fill(0).map(c => (
+          {new Array(5).fill(0).map(c => (
             <Card
               key={c}
               imageSource={require('../../assets/images/shop-image.png')}
@@ -51,4 +51,4 @@ const styles = StyleSheet.create({
     width: 370,
   },
 });
-export default ShopsForYou;
+export default MyShops;

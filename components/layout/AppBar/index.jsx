@@ -7,12 +7,12 @@ import {
   useNavigation,
 } from '@react-navigation/native';
 import { TouchableHighlight } from 'react-native-gesture-handler'
-const AppBar = ({ title, isBottomSheet = false, onPress = () => { } }) => {
+const AppBar = ({ title, isBottomSheet = false, onPress = () => { }, style = {}, titleStyle = {} }) => {
   const navigation = useNavigation()
   return (
     <View style={[styles.header, {
       flexDirection: isBottomSheet ? 'row-reverse' : 'row'
-    }]}>
+    }, style]}>
       <TouchableHighlight
         onPress={() => isBottomSheet ? onPress() : navigation.goBack()}
         underlayColor={colors.underlayColor}
@@ -21,9 +21,9 @@ const AppBar = ({ title, isBottomSheet = false, onPress = () => { } }) => {
         }]}>
         <LeftArrowSvg />
       </TouchableHighlight>
-      {title && <Typography variant='h1' fontSize={18} fontWeight={600} style={{
+      {title && <Typography variant='h1' fontSize={18} fontWeight={600} style={[{
         flex: 1
-      }} >
+      }, titleStyle]} >
         {title}
       </Typography>}
     </View>

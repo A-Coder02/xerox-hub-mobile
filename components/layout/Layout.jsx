@@ -7,7 +7,7 @@ const Layout = ({ children, style = {} }) => {
   const inset = useSafeAreaInsets()
 
   return (
-    <View style={[{ flex: 1, backgroundColor: colors.white, paddingTop: inset.top, paddingBottom: inset.bottom, paddingHorizontal: 16 }, style]}>
+    <View style={[{ flex: 1, backgroundColor: colors.white, paddingTop: inset.top, paddingBottom: inset.bottom + 8, paddingHorizontal: 16 }, style]}>
       {children}
     </View>
   )
