@@ -29,7 +29,7 @@ const PreLogin = () => {
 
   }
 
-  const { container, buttonContainer, textAlignment, googleButton } = styles;
+  const { container, buttonContainer, textAlignment } = styles;
 
   return (
     <Layout>
@@ -48,7 +48,7 @@ const PreLogin = () => {
           </Typography>
         </View>
         <View style={buttonContainer}>
-          <View style={googleButton}>
+          <View>
             <Button
               title="Login with Google"
               size="large"
