@@ -22,7 +22,6 @@ const MyFilesScreen = () => {
   const [files, setFiles] = useState([]);
   const [fileName, setFileName] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);  // Store the selected file temporarily
-  const [tempFileName, setTempFileName] = useState('');  // Local variable to store selected file name
   const navigation = useNavigation(); 
 
   useEffect(() => {
@@ -41,25 +40,27 @@ const MyFilesScreen = () => {
   }, []);
 
   
-  const handleFilePicker = async () => {
+  const handleFilePicker = async () => { 
     try {
       const res = await DocumentPicker.pick({
         type: [DocumentPicker.types.images, 'application/pdf'],
       });
   
       if (res) {
+        const { name, uri, type, size } = res[0];
         const fileData = {
           id: Date.now().toString(),
-          name: tempFileName || res[0]?.name || 'Unnamed File', // Use tempFileName or fallback to the file's original name
-          uri: res[0]?.uri,
-          type: res[0]?.type,
-          size: res[0]?.size,
+          name: name || 'Unnamed File',
+          uri,
+          type,
+          size,
           date: new Date().toISOString(),
         };
+        
   
-        // Store file in selectedFile state instead of directly saving to AsyncStorage
+        // Store the new file in selectedFile state
         setSelectedFile(fileData);
-        setTempFileName(fileData.name); // Store the file name temporarily
+
       }
     } catch (err) {
       if (DocumentPicker.isCancel(err)) {
@@ -70,6 +71,7 @@ const MyFilesScreen = () => {
       }
     }
   };
+  
 
   
   const saveFile = async () => {
@@ -82,7 +84,7 @@ const MyFilesScreen = () => {
       return;
     }
     // Validate if a file name is entered
-    if (!fileName.trim() && !tempFileName.trim()) {
+    if (!fileName.trim() ) {
       Alert.alert('File name required', 'Please enter a file name before uploading.');
       return;
     }
@@ -119,7 +121,6 @@ const MyFilesScreen = () => {
         Alert.alert('File saved successfully!');
         setSelectedFile(null);
         setFileName(''); // Reset the input field
-        setTempFileName('');
         drawerRef.current.close();
       } catch (error) {
         console.error('Error saving file to AsyncStorage:', error);
@@ -141,14 +142,15 @@ const MyFilesScreen = () => {
       Alert.alert('Error', 'Failed to clear AsyncStorage.');
     }
   };
-
   const renderFileItem = ({ item }) => {
-    const fileDate = new Date(item.date);
+    const { date, type, name } = item;  // Destructuring item here
+    const fileDate = new Date(date);
+  
     if (isNaN(fileDate.getTime())) {
-      console.error('Invalid date:', item.date);
+      console.error('Invalid date:', date);
       return null;
     }
-
+  
     const formattedDate =
       fileDate.toLocaleDateString('en-US', {
         day: '2-digit',
@@ -161,22 +163,22 @@ const MyFilesScreen = () => {
         minute: '2-digit',
         hour12: true,
       });
-
+  
     return (
       <TouchableOpacity
         style={styles.fileItem}
         onPress={() => navigation.navigate('FileViewScreen', { file: item })}
       >
         <View style={styles.fileIconContainer}>
-          {item.type?.includes('pdf') ? (
+          {type?.includes('pdf') ? (
             <PdfSvgIcon width={36} height={36} paddingLeft={0} paddingTop={0} color={colors.red} />
-          ) : item.type?.includes('image') ? (
+          ) : type?.includes('image') ? (
             <ImageSvgicon width={43} height={44} marginLeft={-2.5} marginTop={0}  color={colors.primary}/>
           ) : null}
         </View>
         <View style={styles.fileDetailsContainer}>
-          <Typography variant="base" fontSize={16} fontWeight={500}>
-            {item.name}
+          <Typography variant="base" fontSize={16} fontWeight={500} style={{ marginBottom: 4 }}>
+            {name.length > 17 ? name.substring(0, 17) + '...' : name}
           </Typography>
           <Typography variant="caption" fontSize={14} fontWeight={500} color="grayDark">
             {formattedDate}
@@ -198,6 +200,7 @@ const MyFilesScreen = () => {
       </TouchableOpacity>
     );
   };
+  
 
   return (
         <Layout style={{ flex: 1 }}>
@@ -214,15 +217,21 @@ const MyFilesScreen = () => {
             }
           />
           <View style={styles.floatingButtonContainer}>
-            <View style={styles.plusButton}>
+            <TouchableOpacity style={styles.plusButton} onPress={() => drawerRef.current?.snapToIndex(0)}>
               <IconButton
                 icon={() => (
-                  <PlusIcon width={19} height={19} color={colors.whiteLight} />
+                  <PlusIcon width={19} height={19} color={colors.whiteLight}  onPress={() => drawerRef.current?.snapToIndex(0)} />//this will chagne later when we get a new custome and dynamic way of changing height and width of iconbutton
                 )}
-                onPress={() => drawerRef.current?.snapToIndex(0)}
               />
-            </View>
+            </TouchableOpacity>
           </View>
+
+    {/* CLear button */}
+
+      {/* <View style={styles.clearButton}>
+        <Button onPress={clearAsyncStorage} title='Clear' size='small' variant='text' fontWeight={600} color={colors.whiteLight} />
+      </View> */}
+
 
           <BottomDrawer ref={drawerRef}>
       <AppBar title="Add File" isBottomSheet onPress={() => drawerRef.current.close()} />
@@ -241,8 +250,8 @@ const MyFilesScreen = () => {
             fontWeight={600} 
             color={colors.whiteLight}
             numberOfLines={1} 
-            ellipsizeMode="tail" 
-            style={{ width: '100%', textOverflow: 'ellipsis' }}
+            // ellipsizeMode="tail" 
+            style={styles.fileName}
           >
       {selectedFile.name.length > 27 ? selectedFile.name.substring(0, 27) + '...' : selectedFile.name}
       </Typography>
@@ -268,11 +277,6 @@ const MyFilesScreen = () => {
       </ScrollView>
     </BottomDrawer>
 
-{/* CLear button */}
-
-      {/* <View style={styles.clearButton}>
-      <Button onPress={clearAsyncStorage} title='Clear' size='small' variant='text' fontWeight={600} color={colors.whiteLight} />
-      </View> */}
 
 
     </Layout>
@@ -308,6 +312,7 @@ const styles = StyleSheet.create({
     fontSize: 18,  
     padding: 20, 
   },
+
   floatingButtonContainer: {
     position: 'absolute',
     bottom: 48,
@@ -326,38 +331,40 @@ const styles = StyleSheet.create({
     marginTop: 32,
     marginBottom: 16,
   },
-
-
-  
-dashedFrame: {
-  height: 165,
-  borderWidth: 3,  // Reduced thickness of the dashed line
-  borderColor: colors.gray, // Set the stroke color to #6F6F6F
-  borderStyle: 'dashed',
-  borderRadius: 12, // Rounded corners
-  padding: 20,
-  alignItems: 'center', // Center the icon inside the frame
-  justifyContent: 'center',
-  marginBottom:70,
-},
-roundedRectangle: {
-  width: '55%', // Takes full width of the dashed frame
-  height: 50, // Height of the inner rounded rectangle
-  backgroundColor: colors.primary, // White background for the inner rectangle
-  borderRadius: 12, // Rounded corners for the inner rectangle
-  flexDirection: 'row', // Align items horizontally
-  alignItems: 'center', // Center vertically
-  justifyContent: 'center', // Center horizontally
-  paddingHorizontal: 15, // Padding inside the inner rectangle
-},
- clearButton: {
-  backgroundColor: colors.red,
-  marginBottom: 47,
-  borderRadius: 50,
-  alignSelf: 'flex-start', // Aligns the button to the left
-  justifyContent: 'center', // Centers content vertically
-  alignItems: 'center', // Centers content horizontally
-},
+  fileName:{
+     width: '100%',
+      textOverflow: 'ellipsis',
+      textAlign:'center', 
+    },
+  dashedFrame: {
+    height: 165,
+    borderWidth: 3,  
+    borderColor: colors.gray, 
+    borderStyle: 'dashed',
+    borderRadius: 12, 
+    padding: 20,
+    alignItems: 'center', 
+    justifyContent: 'center',
+    marginBottom:70,
+  },
+  roundedRectangle: {
+    width: '55%', 
+    height: 50, 
+    backgroundColor: colors.primary,
+    borderRadius: 12, 
+    flexDirection: 'row',
+    alignItems: 'center', 
+    justifyContent: 'center',
+    paddingHorizontal: 15,
+  },
+  clearButton: {
+    backgroundColor: colors.red,
+    marginBottom: 47,
+    borderRadius: 50,
+    alignSelf: 'flex-start',
+    justifyContent: 'center', 
+    alignItems: 'center',
+  },
 
 });
 
