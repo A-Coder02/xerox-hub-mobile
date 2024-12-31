@@ -39,6 +39,8 @@ const MyFilesScreen = () => {
 
     fetchStoredFiles();
   }, []);
+
+  
   const handleFilePicker = async () => {
     try {
       const res = await DocumentPicker.pick({
@@ -68,25 +70,33 @@ const MyFilesScreen = () => {
       }
     }
   };
+
   
   const saveFile = async () => {
-    console.log('Save button pressed'); // Add this line to debug
-  
+    console.log('Save button pressed'); // Debug log
+    const trimmedFileName = fileName.trim();
+
+    // Check if the fileName is empty after trimming
+    if (!trimmedFileName) {
+      Alert.alert('File name required', 'Please enter a file name before uploading.');
+      return;
+    }
     // Validate if a file name is entered
     if (!fileName.trim() && !tempFileName.trim()) {
       Alert.alert('File name required', 'Please enter a file name before uploading.');
-      return;  // Stop the function if no file name is provided
+      return;
     }
   
     // Validate if file limit is reached (up to 3 files)
     if (files.length >= 3) {
       Alert.alert('File upload limit reached', 'You can only upload up to 3 files.');
-      return;  // Stop the function if the limit is exceeded
+      return;
     }
   
     // Check if the file name already exists
     const isFileNameExists = files.some(file =>
-      (file.name.toLowerCase() === fileName.trim().toLowerCase() || file.name.toLowerCase() === tempFileName.trim().toLowerCase()) && file.type === selectedFile?.type
+      file.name.toLowerCase() === fileName.trim().toLowerCase() &&
+      file.type === selectedFile?.type
     );
   
     if (isFileNameExists) {
@@ -94,15 +104,21 @@ const MyFilesScreen = () => {
       return;
     }
   
-    // Proceed with saving the file if validation is passed
     if (selectedFile) {
-      const updatedFiles = [...files, selectedFile];
+      // Update the file object with the custom file name from the text field
+      const updatedFile = {
+        ...selectedFile,
+        name: fileName.trim() || selectedFile.name, // Use the custom name if provided
+      };
+  
+      const updatedFiles = [...files, updatedFile];
       setFiles(updatedFiles);
+  
       try {
         await AsyncStorage.setItem('fileUris', JSON.stringify(updatedFiles));
         Alert.alert('File saved successfully!');
         setSelectedFile(null);
-        setFileName('');
+        setFileName(''); // Reset the input field
         setTempFileName('');
         drawerRef.current.close();
       } catch (error) {
@@ -184,84 +200,81 @@ const MyFilesScreen = () => {
   };
 
   return (
-    <Layout style={{ flex: 1 }}>
-      <AppBar title="My Files" />
-      <FlatList
-        data={files}
-        keyExtractor={(item) => item.id}
-        renderItem={renderFileItem}
-        contentContainerStyle={styles.listContent}
-        ListEmptyComponent={
-          <Typography variant="caption" fontWeight={500} color="darkGray" style={styles.noFiles}>
-            No files available.
-          </Typography>
-        }
-      />
-      <View style={styles.floatingButtonContainer}>
-        <View style={styles.plusButton}>
-          <IconButton
-            icon={() => (
-              <PlusIcon width={19} height={19} color={colors.whiteLight} />
-            )}
-            onPress={() => drawerRef.current?.snapToIndex(0)}
+        <Layout style={{ flex: 1 }}>
+          <AppBar title="My Files" />
+          <FlatList
+            data={files}
+            keyExtractor={(item) => item.id}
+            renderItem={renderFileItem}
+            contentContainerStyle={styles.listContent}
+            ListEmptyComponent={
+              <Typography variant="caption" fontWeight={500} color="darkGray" style={styles.noFiles}>
+                No files available.
+              </Typography>
+            }
           />
-        </View>
-      </View>
+          <View style={styles.floatingButtonContainer}>
+            <View style={styles.plusButton}>
+              <IconButton
+                icon={() => (
+                  <PlusIcon width={19} height={19} color={colors.whiteLight} />
+                )}
+                onPress={() => drawerRef.current?.snapToIndex(0)}
+              />
+            </View>
+          </View>
 
-      <BottomDrawer ref={drawerRef}>
-  <AppBar title="Add File" isBottomSheet onPress={() => drawerRef.current.close()} />
-  <ScrollView style={styles.bottomSheetContent}>
-    <TextField
-      label="File name"
-      value={fileName}  // This still holds the custom name input by the user
-      onChange={setFileName}
-      style={styles.textField}
-    />
-    <View style={styles.dashedFrame}>
-      {selectedFile && (
-        <Typography 
-  variant="body" 
-  fontSize={16} 
-  fontWeight={600} 
-  color={colors.whiteLight}
-  numberOfLines={1} 
-  ellipsizeMode="tail" 
-  style={{ width: '100%', textOverflow: 'ellipsis' }}
->
-  Selected file: { tempFileName || selectedFile?.name}  {/* Display the original file name picked */}
-</Typography>
-
-      )}
-
-      <TouchableOpacity onPress={handleFilePicker} style={styles.roundedRectangle}>
-        <UploadSvgIcon
-          size="small"
-          height={24}
-          width={25}
-          color={colors.whiteLight}
-          strokeWidth={2}
-          marginRight={2}
+          <BottomDrawer ref={drawerRef}>
+      <AppBar title="Add File" isBottomSheet onPress={() => drawerRef.current.close()} />
+      <ScrollView style={styles.bottomSheetContent}>
+        <TextField
+          label="File name"
+          value={fileName}  // This still holds the custom name input by the user
+          onChange={setFileName}
+          style={styles.textField}
         />
-        <Typography color="whiteLight" fontSize={14} fontWeight={600}>
-          Choose File
-        </Typography>
-      </TouchableOpacity>
-    </View>
-    <TouchableOpacity 
-      onPress={saveFile} 
-      style={[styles.saveButton, !selectedFile && styles.disabledButton]} 
-      disabled={!selectedFile}
-    >
-      <Button title='Save' fontWeight={600} color={colors.whiteLight} />
-    </TouchableOpacity>
-  </ScrollView>
-</BottomDrawer>
+        <View style={styles.dashedFrame}>
+          {selectedFile && (
+            <Typography 
+            variant="body" 
+            fontSize={16} 
+            fontWeight={600} 
+            color={colors.whiteLight}
+            numberOfLines={1} 
+            ellipsizeMode="tail" 
+            style={{ width: '100%', textOverflow: 'ellipsis' }}
+          >
+      {selectedFile.name.length > 27 ? selectedFile.name.substring(0, 27) + '...' : selectedFile.name}
+      </Typography>
 
-           {/* <TouchableOpacity onPress={clearAsyncStorage} style={styles.clearButton}>
-        <Typography color="white" fontSize={16} fontWeight={600}>
-          Clear All Files
-        </Typography>
-      </TouchableOpacity> */}
+          )}
+
+          <TouchableOpacity onPress={handleFilePicker} style={styles.roundedRectangle}>
+            <UploadSvgIcon
+              size="small"
+              height={24}
+              width={25}
+              color={colors.whiteLight}
+              strokeWidth={2}
+              marginRight={2}
+            />
+            <Typography color="whiteLight" fontSize={14} fontWeight={600}>
+              Choose File
+            </Typography>
+          </TouchableOpacity>
+        </View>
+
+          <Button onPress={saveFile} title='Save' size='large' fontWeight={600} color={colors.whiteLight} />
+      </ScrollView>
+    </BottomDrawer>
+
+{/* CLear button */}
+
+      {/* <View style={styles.clearButton}>
+      <Button onPress={clearAsyncStorage} title='Clear' size='small' variant='text' fontWeight={600} color={colors.whiteLight} />
+      </View> */}
+
+
     </Layout>
   );
 };
@@ -325,7 +338,7 @@ dashedFrame: {
   padding: 20,
   alignItems: 'center', // Center the icon inside the frame
   justifyContent: 'center',
-  // marginBottom:70,
+  marginBottom:70,
 },
 roundedRectangle: {
   width: '55%', // Takes full width of the dashed frame
@@ -337,28 +350,15 @@ roundedRectangle: {
   justifyContent: 'center', // Center horizontally
   paddingHorizontal: 15, // Padding inside the inner rectangle
 },
+ clearButton: {
+  backgroundColor: colors.red,
+  marginBottom: 47,
+  borderRadius: 50,
+  alignSelf: 'flex-start', // Aligns the button to the left
+  justifyContent: 'center', // Centers content vertically
+  alignItems: 'center', // Centers content horizontally
+},
 
-
-  saveButton: {
-    backgroundColor: '#50C878',
-    marginTop: 16,
-    paddingVertical: 12,
-    borderRadius: 8,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  clearButton: {
-    backgroundColor: '#FF4C4C',
-    marginTop: 20,
-    paddingVertical: 12,
-    borderRadius: 8,
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
-    bottom: 30,
-    left: 30,
-    right: 30,
-  },
 });
 
 
