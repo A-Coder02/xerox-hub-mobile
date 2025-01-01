@@ -10,6 +10,7 @@ import {
 import {useNavigation} from '@react-navigation/native';
 import LeftArrowSvg from '../../assets/icons/LeftArrowSvg';
 import Layout from '../../components/layout/Layout';
+import Typography from '../../components/typography/Typography';
 const avatars = [
   {id: 1, image: require('../../assets/images/image-7.png')},
   {id: 2, image: require('../../assets/images/image-6.png')},
@@ -32,7 +33,7 @@ const AvtarScreen = () => {
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <LeftArrowSvg />
           </TouchableOpacity>
-          <Text style={styles.headerTitle}>Change Avatar</Text>
+          <Typography style={styles.headerTitle}>Change Avatar</Typography>
         </View>
         {/* Selected Avatar Display */}
         <View style={styles.selectedAvatarContainer}>
@@ -43,7 +44,7 @@ const AvtarScreen = () => {
         </View>
         {/* Avatar Options */}
         <View style={styles.avatarContainer}>
-          <Text style={styles.subTitle}>Choose Your Avatar!</Text>
+          <Typography style={styles.subTitle}>Choose Your Avatar!</Typography>
           <FlatList
             data={avatars}
             keyExtractor={item => item.id.toString()}
@@ -68,7 +69,7 @@ const AvtarScreen = () => {
         <TouchableOpacity
           style={styles.button}
           onPress={() => navigation.goBack()}>
-          <Text style={styles.buttonText}>Go Back</Text>
+          <Typography style={styles.buttonText}>Go Back</Typography>
         </TouchableOpacity>
       </View>
     </Layout>
