@@ -1,14 +1,23 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { TextInput, View, StyleSheet, Text } from 'react-native';
 import colors from '../../../utils/colors';
 
-const OtpInput = ({ length = 4, onChange, style, inputStyle }) => {
+const OtpInput = ({ autoFocus = false, length = 4, value, onChange = () => { }, style, inputStyle }) => {
   const [otp, setOtp] = useState(Array(length).fill(''));
+  useEffect(() => {
+    if (value) {
+      setOtp(value);
+    }
+  }, [value])
 
   const inputs = useRef([]);
+  useEffect(() => {
+    if (inputs.current && autoFocus) {
+      inputs.current[0]?.focus();
+    }
+  }, [inputs.current, autoFocus])
 
   const handleInputChange = (text, index) => {
-    console.log({ text })
     const newOtp = [...otp];
     newOtp[index] = text;
     setOtp(newOtp);
