@@ -14,4 +14,6 @@ export default colors = {
     // Extras
 
     red:"#FF4040",
+    lightRed:"#990000",
+    lightGreen:"#184e2a",
 }

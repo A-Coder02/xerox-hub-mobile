@@ -11,7 +11,7 @@ const PrintSvgIcon = ({ width = 48, height = 48, ...props }) => (
     xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
-    <Rect width={48} height={48} rx={8} fill={colors.primary} fillOpacity={0.17} />
+    <Rect width={48} height={48} rx={8} fill={colors.lightGreen} fillOpacity={0.17} />
     <Rect
       x={0.5}
       y={0.5}

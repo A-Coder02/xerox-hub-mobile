@@ -11,7 +11,7 @@ const DeleteSvgIcon = ({ color = colors.red, width, height, ...props }) => (
     xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
-    <Rect width={48} height={48} rx={8} fill={color} fillOpacity={0.28} />
+    <Rect width={48} height={48} rx={8} fill={colors.lightRed} fillOpacity={0.28} />
     <Path
       d="M35 15H13"
       stroke={color}

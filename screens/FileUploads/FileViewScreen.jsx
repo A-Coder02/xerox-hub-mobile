@@ -50,12 +50,14 @@ const FileViewScreen = () => {
   };
 
   return (
-    <Layout style={{ flex: 1 }} backgroundColor="black">
+    <Layout style={{ flex: 1 }} backgroundColor={colors.black}>
       <SecondAppBar title={file?.name} />
 
-    <View style={styles.container}>
-      {imageUri ? (
-        <ZoomableImage imageUri={imageUri} />
+          <View style={styles.container}>
+            {imageUri ? (
+        <View style={styles.zoomableImageWrapper}>
+          <ZoomableImage imageUri={imageUri} />
+        </View>
       ) : (
         <View style={styles.fileDetails}>
           <Typography>{file?.name}</Typography>
@@ -65,31 +67,37 @@ const FileViewScreen = () => {
 
       {/* Delete and Print Buttons */}
       <View style={styles.iconContainer}>
-        <TouchableOpacity  onPress={handleDelete}>
-          <DeleteSvgIcon width={48} height={48} color="red" />
+        <TouchableOpacity onPress={handleDelete}>
+          <DeleteSvgIcon width={48} height={48} />
         </TouchableOpacity>
 
-        <TouchableOpacity  onPress={handlePrint}>
-          <PrintSvgIcon width={48} height={48} color="green" />
+        <TouchableOpacity onPress={handlePrint}>
+          <PrintSvgIcon width={48} height={48} />
         </TouchableOpacity>
       </View>
     </View>
+
     </Layout>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start', // Start content at the top
     alignItems: 'center',
-    backgroundColor: 'black',
-    padding: 0,
+    backgroundColor: colors.black,
+    paddingTop: 16, // Adjust padding for spacing between AppBar and content
   },
   fileDetails: {
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 0,
+  },
+  zoomableImageWrapper: {
+    flex: 1, // Allow the image to take up available space
+    justifyContent: 'center', // Center the image vertically
+    alignItems: 'center', // Center the image horizontally
+    marginTop: -90, // Move the image slightly upwards
   },
   iconContainer: {
     position: 'absolute',
@@ -97,9 +105,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
-    paddingHorizontal: 70,  
+    paddingHorizontal: 70,
   },
-
 });
+
 
 export default FileViewScreen;
