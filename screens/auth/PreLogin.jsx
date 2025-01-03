@@ -99,7 +99,6 @@ const PreLogin = () => {
         </View>
       </View>
 
-
       <BottomDrawer ref={drawerRef}>
         {activeComponent === 'login' ? (
           <Login

@@ -2,8 +2,8 @@ import * as React from "react";
 import Svg, { Path } from "react-native-svg";
 const PencilSvg = (props) => (
   <Svg
-    width={48}
-    height={48}
+    width={32}
+    height={32}
     viewBox="0 0 33 32"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"

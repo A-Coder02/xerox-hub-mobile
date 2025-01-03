@@ -14,8 +14,7 @@ import PreLogin from './screens/auth/PreLogin';
 import ChooseLocationScreen from './screens/locations/ChooseLocationScreen';
 import ProfileScreen from './screens/profile/ProfileScreen';
 import FormikFormScreen from './screens/components/FormikFormScreen';
-import ShopsForYou from './screens/home/ShopsForYou';
-import MyShops from './screens/profile/MyShops';
+import ContactUs from './screens/profile/ContactUs';
 const Stack = createNativeStackNavigator();
 
 const getIsSignedIn = () => {
@@ -62,7 +61,7 @@ export default function AppNavigations() {
     <Stack.Navigator screenOptions={{
       headerShown: false
     }}
-      initialRouteName='MyShops'
+      initialRouteName='Profile'
     >
       <Stack.Screen name="PreLogin" component={PreLogin} />
       <Stack.Screen name="CreateAccount" component={CreateAccount} />
@@ -72,8 +71,7 @@ export default function AppNavigations() {
           <Stack.Screen name="Profile" component={ProfileScreen} />
           <Stack.Screen name="Settings" component={SettingsScreen} />
           <Stack.Screen name="ChooseLocation" component={ChooseLocationScreen} />
-          <Stack.Screen name="ShopsForYou" component={ShopsForYou} />
-          <Stack.Screen name="MyShops" component={MyShops} />
+          <Stack.Screen name="Contact Us" component={ContactUs} />
 
         </>
       ) : (
