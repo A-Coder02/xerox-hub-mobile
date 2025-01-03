@@ -135,7 +135,6 @@ const MyFilesScreen = () => {
   const clearAsyncStorage = async () => {
     try {
       await AsyncStorage.clear();
-      Alert.alert('All data cleared successfully!');
       setFiles([]);
     } catch (error) {
       console.error('Error clearing AsyncStorage:', error);
@@ -228,9 +227,9 @@ const MyFilesScreen = () => {
 
     {/* CLear button */}
 
-      {/* <View style={styles.clearButton}>
+      <View style={styles.clearButton}>
         <Button onPress={clearAsyncStorage} title='Clear' size='small' variant='text' fontWeight={600} color={colors.whiteLight} />
-      </View> */}
+      </View>
 
 
           <BottomDrawer ref={drawerRef}>

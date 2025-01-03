@@ -19,7 +19,7 @@ const SecondAppBar = ({ title, isBottomSheet = false, onPress = () => { } }) => 
         style={[styles.backButton, {
           transform: [{ rotate: isBottomSheet ? '-90deg' : "0deg" }]
         }]}>
-    <LeftArrowSvg fillColor="black" strokeColor={colors.white}  rectanleColor="black"/>
+    <LeftArrowSvg fillColor={colors.black} strokeColor={colors.white}  rectanleColor={colors.black}/>
     </TouchableHighlight>
       {title && <Typography 
         variant='h1' 
@@ -39,15 +39,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 16,
-    backgroundColor: 'black', 
+    backgroundColor: colors.black, 
 
   },
   backButton: {
-    backgroundColor: colors.grayDark,
+    backgroundColor: colors.black,
     borderRadius: 100,
   },
   title: {
     flex: 1,
-    color: 'white', // White text color
+    color: colors.white, // White text color
   },
 });
